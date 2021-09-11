@@ -7,7 +7,14 @@ import { logIn } from '../redux/adapters/currentUserAdapters'
 const Login = (props) => {
     const [userId, setUserId] = React.useState("")
     const [password, setPassword] = React.useState("")
+    const [isDisabled, setIsDisabled] = React.useState(true)
 
+    const buttonState = () => {
+        if(userId !=="" && password !==""){
+            console.log("hi")
+            setIsDisabled(false)
+        }
+    }
 
     const handelSubmit = () => {
         const logInData = {
@@ -35,7 +42,7 @@ const Login = (props) => {
                         icon='user'
                         iconPosition='left'
                         placeholder='Username'
-                        onChange={(event) => setUserId(event.target.value)}
+                        onChange={(event) => {setUserId(event.target.value); buttonState()}}
                     />
                     <Form.Input
                         fluid
@@ -44,9 +51,9 @@ const Login = (props) => {
                         iconPosition='left'
                         placeholder='Password'
                         type='password'
-                        onChange={(event) => setPassword(event.target.value)}
+                        onChange={(event) => {setPassword(event.target.value); buttonState()}}
                     />
-                    <Button inverted fluid size='large'>
+                    <Button inverted fluid disabled={isDisabled} size='large'>
                         Login
                     </Button>
                     <Message error content='Username or Password is incorrect.'/>

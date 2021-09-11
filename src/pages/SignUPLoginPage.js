@@ -4,10 +4,10 @@ import { connect } from "react-redux"
 import { Header, Divider, Grid, Segment } from 'semantic-ui-react'
 import Login from '../components/Login'
 import SignUp from  '../components/SignUp'
+import { logInFromState } from '../redux/adapters/utilityAdapters'
 
 
 const SignUPLoginPage = (props) => {
-    const[formState, setFormState] = React.useState("logIn")
 
     React.useEffect(() => {
         if (localStorage.token) {
@@ -20,15 +20,15 @@ const SignUPLoginPage = (props) => {
             <Grid.Column style={{ maxWidth: 450 }}>
             <Header inverted className="textColor" as='h1' textAlign='center' >Welcome to Pokémon Card</Header>
             <Segment inverted className="frostglass">
-                {(formState === "logIn")?
+                {(props.formState === "logIn")?
                     <Login />:
                     <SignUp />
                 }                    
                 <Divider inverted className="textColor" horizontal>Or</Divider>
                 <Segment className="transparent" raised>
-                    {(formState === "logIn")?
-                        <Header inverted as='h4'>Not with us yet? <Link to="/signup" onClick={() => setFormState("signUp")}>Sign Up</Link></Header>:
-                        <Header inverted as='h4'>Already with us yet? <Link to="/login" onClick={() => setFormState("logIn")}>Login</Link></Header>
+                    {(props.formState === "logIn")?
+                        <Header inverted as='h4'>Not with us yet? <Link to="/signup" onClick={() => props.logInFromState("signUp")}>Sign Up</Link></Header>:
+                        <Header inverted as='h4'>Already with us yet? <Link to="/login" onClick={() => props.logInFromState("logIn")}>Login</Link></Header>
                     }
 
                 </Segment>
@@ -40,12 +40,13 @@ const SignUPLoginPage = (props) => {
 
 const mapStateToProps = state => {
     return {
-        currentUser: state.currentUserReducers
+        currentUser: state.currentUserReducers,
+        formState: state.utilityReducers.formState
     }
 }
 
 const mapDispatchToProps = {
-    
+    logInFromState
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(SignUPLoginPage)

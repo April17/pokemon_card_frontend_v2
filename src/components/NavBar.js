@@ -1,8 +1,10 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Input } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Input, Image } from 'semantic-ui-react'
+import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
+import logo from '../assets/Logo/PokeBallicon.svg'
 
 
 
@@ -10,19 +12,23 @@ const NavBar = (props) => {
     
 
     const handleClick = (event) => {
+        if (event.target.attributes.name.nodeValue === "login"){
+            props.logInFromState("logIn")
+        }
         props.history.push(`/${event.target.attributes.name.nodeValue}`)
     }
 
     const handleLogout = () => {
+        
         if(localStorage.token){
             localStorage.clear()
-            props.history.push('/login')
+            props.history.push('/')
         }
     }
 
     return (
-        <Menu inverted className="navbar" size='small'>
-            <Menu.Item active={false}></Menu.Item>
+        <Menu inverted className="navbar transparent" size='small'>
+            <Menu.Item active={false}><Image src={logo} onClick={handleClick} name="" size='mini' /></Menu.Item>
             <Menu.Item active={false}>
                 <Header inverted as='h1' onClick={handleClick} name="">Pokémon Card</Header>
             </Menu.Item> 
@@ -66,7 +72,7 @@ const mapStateToProps = state => {
   }
   
   const mapDispatchToProps = {
-
+    logInFromState
   }
 
 
