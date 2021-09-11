@@ -9,7 +9,7 @@ const ProfilePage = (props) => {
     React.useEffect(() => {
         if (!localStorage.token || localStorage.token === "undefined") {
             localStorage.clear()
-            props.history.push('/login')
+            props.history.push('/')
         }
     }, [props.history])
     
