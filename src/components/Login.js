@@ -13,9 +13,13 @@ const Login = (props) => {
     const [rememberMe, setRememberMe] = React.useState(false)
 
     React.useEffect(() => {
-        console.log("hi")
-        if(localStorage.rememberMe){
+        if(localStorage.rememberMe === "true"){
             console.log("hi")
+            setRememberMe((localStorage.rememberMe==="true"))
+            setUserId(localStorage.userId)
+        } else {
+            setRememberMe(!(localStorage.rememberMe==="false"))
+            localStorage.userId = ""
         }
     }, [])
 
@@ -28,19 +32,22 @@ const Login = (props) => {
     }
 
     const checkBoxState = (event) => {
-        console.log(event.target.checked)
         setRememberMe(event.target.checked)
-        console.log(rememberMe)
-        // if(event.target.checked){
-        //     localStorage.rememberMe = true
-        //     localStorage.userId = userId
-        // } else {
-        //     localStorage.rememberMe = false
-        //     localStorage.userId = ""
-        // }
+        localStorage.rememberMe = event.target.checked
+        localStorage.userId = userId
     }
 
-    const handelSubmit = () => {
+    const handleUsername = event => {
+        setUserId(event.target.value); 
+        buttonState(); 
+        if(rememberMe){
+            localStorage.userId = event.target.value
+        } else {
+            localStorage.userId = ""
+        }
+    }
+
+    const handleSubmit = () => {
         setLoadingState(true)
         const logInData = {
             userId: userId,
@@ -63,7 +70,7 @@ const Login = (props) => {
             <Header className="textColor" as='h2' inverted color="grey" textAlign='center'>
                 Login to your account
             </Header>
-            <Form error={props.currentUser.errorState} inverted size='large' onSubmit={handelSubmit}>
+            <Form error={props.currentUser.errorState} inverted size='large' onSubmit={handleSubmit}>
 
                 <Segment className="transparent" textAlign='left' raised>
                     <Form.Input
@@ -73,7 +80,8 @@ const Login = (props) => {
                         icon='user'
                         iconPosition='left'
                         placeholder='Username'
-                        onChange={(event) => {setUserId(event.target.value); buttonState()}}
+                        value={userId}
+                        onChange={handleUsername}
                     />
                     <Form.Input
                         fluid
@@ -83,6 +91,7 @@ const Login = (props) => {
                         iconPosition='left'
                         placeholder='Password'
                         type='password'
+                        value={password}
                         onChange={(event) => {setPassword(event.target.value); buttonState()}}
                     />
                     <Form.Checkbox id="remember_me" label='Remember me' checked={rememberMe} onChange={ (event) => checkBoxState(event)} />
