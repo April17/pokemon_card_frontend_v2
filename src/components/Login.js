@@ -14,7 +14,6 @@ const Login = (props) => {
 
     React.useEffect(() => {
         if(localStorage.rememberMe === "true"){
-            console.log("hi")
             setRememberMe((localStorage.rememberMe==="true"))
             setUserId(localStorage.userId)
         } else {

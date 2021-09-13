@@ -48,3 +48,7 @@
   background-color: rgba(255, 255, 255, .15) !important;
   backdrop-filter: blur(5px) !important;
 }
+
+.hide {
+  display: none;
+}

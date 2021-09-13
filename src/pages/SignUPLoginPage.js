@@ -33,7 +33,6 @@ const SignUPLoginPage = (props) => {
                         <Header inverted as='h4'>Not with us yet? <Link to="/signup" onClick={() => props.logInFromState("signUp")}>Sign Up</Link></Header>:
                         <Header inverted as='h4'>Already with us? <Link to="/login" onClick={() => props.logInFromState("logIn")}>Login</Link></Header>
                     }
-
                 </Segment>
             </Segment>
             </Grid.Column>

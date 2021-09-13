@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Input, Image } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Image, Segment } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
@@ -18,10 +18,13 @@ const NavBar = (props) => {
         props.history.push(`/${event.target.attributes.name.nodeValue}`)
     }
 
-    const handleLogout = () => {
-        
+    const handleLogout = () => {        
         if(localStorage.token){
+            const rememberMe = localStorage.rememberMe
+            const userId = localStorage.userId
             localStorage.clear()
+            localStorage.rememberMe = rememberMe
+            localStorage.userId = userId
             props.history.push('/')
         }
     }
@@ -33,12 +36,6 @@ const NavBar = (props) => {
                 <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
             </Menu.Item> 
             <Menu.Menu position='right'>
-                <Menu.Item active={false}>
-                    <Input
-                        icon={{ name: 'search', circular: true, link: true }}
-                        placeholder='Search...'
-                    />
-                </Menu.Item>
                 {
                     localStorage.token? 
                     (
