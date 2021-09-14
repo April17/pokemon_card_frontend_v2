@@ -41,7 +41,7 @@ const NavBar = (props) => {
                     (
                         <Dropdown text='Account' pointing className='link item'>
                             <Dropdown.Menu className="frostglass">
-                                <Dropdown.Item name="profile" onClick={handleClick}><Header inverted as='h5'>Profile</Header></Dropdown.Item>
+                                <Dropdown.Item name="profile" onClick={handleClick}><Header inverted name="profile" as='h5'>Profile</Header></Dropdown.Item>
                                 <Dropdown.Item><Header inverted as='h5'>Account Setting</Header></Dropdown.Item>
                                 <Dropdown.Item><Header inverted as='h5'>Deck List</Header></Dropdown.Item>
                                 <Dropdown.Divider />
