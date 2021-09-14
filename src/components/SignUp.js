@@ -34,16 +34,17 @@ const SignUp = (props) => {
         setLoadingState(true)
         setShowHide("transparent hide")
         if(passwordConfirmation === password){
-            signUpData = {
+            let signUpDataPost = {
                 userId: userId,
                 nickName: nickName,
                 password: password,
                 accountType: "User"
             }
-            props.signUp(signUpData)
+            props.signUp(signUpDataPost)
                 .then(data => {
                     setLoadingState(false)
                     if(data === "UserName already exist."){
+                        setIsDisabled(true)
                         setUserIdError({ content: 'Username already exist.', pointing: 'below' })
                     } else {
                         props.logInFromState("logIn")
@@ -85,8 +86,7 @@ const SignUp = (props) => {
         }        
         setIsDisabled(!signUpFormValidation(signUpData))
     }
-    console.log(signUpData)
-    console.log(isDisabled)
+
     return(
         <Grid.Column style={{ maxWidth: 450 }}>
             <Dimmer active={loadingState}>
