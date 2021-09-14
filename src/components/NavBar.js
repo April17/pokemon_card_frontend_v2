@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Image, Segment } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Image } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
@@ -40,12 +40,12 @@ const NavBar = (props) => {
                     localStorage.token? 
                     (
                         <Dropdown text='Account' pointing className='link item'>
-                            <Dropdown.Menu>
-                                <Dropdown.Item name="profile" onClick={handleClick}>Profile</Dropdown.Item>
-                                <Dropdown.Item>Account Setting</Dropdown.Item>
-                                <Dropdown.Item>Deck List</Dropdown.Item>
+                            <Dropdown.Menu className="frostglass">
+                                <Dropdown.Item name="profile" onClick={handleClick}><Header inverted as='h5'>Profile</Header></Dropdown.Item>
+                                <Dropdown.Item><Header inverted as='h5'>Account Setting</Header></Dropdown.Item>
+                                <Dropdown.Item><Header inverted as='h5'>Deck List</Header></Dropdown.Item>
                                 <Dropdown.Divider />
-                                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                <Dropdown.Item onClick={handleLogout}><Header inverted as='h5'>Logout</Header></Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     ) :

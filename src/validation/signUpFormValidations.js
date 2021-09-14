@@ -1,8 +1,9 @@
 
 export const signUpFormValidation = (signUpData) => {
-    console.log(signUpData)
-    
-    if (userIdValidation(signUpData.userId) && nickNameValidation(signUpData.nickName) && passowrdCheckBoolean()){
+    if (userIdValidation(signUpData.userId) && 
+        nickNameValidation(signUpData.nickName) && 
+        passowrdCheckBoolean() &&
+        confirmPasswordValidation(signUpData.password, signUpData.confirmPassword)){
         return true
     } else {
         return false
@@ -73,4 +74,24 @@ const passowrdCheckBoolean = () => {
         } else {
             return false
         }
+}
+
+export const confirmPasswordValidation = (password, confirmPassword) => {
+    let isDirty = false
+    let confirmed = false
+    if(confirmPassword !== ""){
+        isDirty = true
+    }
+
+    if(confirmPassword === password){
+        confirmed = true
+    } else {
+        confirmed = false
+    }
+
+    if (isDirty && confirmed){
+        return true
+    } else {
+        return false
+    }
 }

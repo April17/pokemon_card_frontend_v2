@@ -3,12 +3,14 @@ import { Button, Form, Grid, Header, Segment, Dimmer, Loader } from 'semantic-ui
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { signUp } from '../redux/adapters/currentUserAdapters'
-import { userIdValidation, nickNameValidation, passwordValidation, signUpFormValidation } from '../validation/signUpFormValidations'
+import { logInFromState } from '../redux/adapters/utilityAdapters'
+import { userIdValidation, nickNameValidation, passwordValidation, confirmPasswordValidation, signUpFormValidation } from '../validation/signUpFormValidations'
 
 let signUpData = {
     userId: "",
     nickName: "",
-    password: ""
+    password: "",
+    confirmPassword: ""
 }
 
 const SignUp = (props) => {
@@ -22,11 +24,15 @@ const SignUp = (props) => {
     const [lowerCase, setLowerCase] = React.useState("red")
     const [number, setNumber] = React.useState("red")
     const [specialChar, setSpecialChar] = React.useState("red")
+    const [userIdError, setUserIdError] = React.useState(false)
+    const [nickNameError, setNickNameError] = React.useState(false)
+    const [confirmPasswordError, setConfirmPasswordError] = React.useState(false)
     const [loadingState, setLoadingState] = React.useState(false)
     const [isDisabled, setIsDisabled] = React.useState(true)
 
     const handleSubmit = () => {
         setLoadingState(true)
+        setShowHide("transparent hide")
         if(passwordConfirmation === password){
             signUpData = {
                 userId: userId,
@@ -35,9 +41,17 @@ const SignUp = (props) => {
                 accountType: "User"
             }
             props.signUp(signUpData)
-                .then(()=> {
+                .then(data => {
                     setLoadingState(false)
-                    props.history.push("/login")
+                    if(data === "UserName already exist."){
+                        setUserIdError({ content: 'Username already exist.', pointing: 'below' })
+                    } else {
+                        props.logInFromState("logIn")
+                        props.history.push("/login")
+                    }
+                })
+                .catch(error => {
+                    console.log(error)
                 })
         } else {
             setLoadingState(false)
@@ -52,10 +66,10 @@ const SignUp = (props) => {
     const validation = (event) => {
         let inputValue = event.target.attributes.name.nodeValue
         if(inputValue === 'userId'){
-            userIdValidation(event.target.value)
+            userIdValidation(event.target.value)? setUserIdError(false) : setUserIdError({ content: 'Please enter your Username', pointing: 'below' })
             signUpData.userId = event.target.value
         } else if (inputValue === "nickName"){
-            nickNameValidation(event.target.value)
+            nickNameValidation(event.target.value)? setNickNameError(false) : setNickNameError({ content: 'Please enter your Nickname', pointing: 'below' })
             signUpData.nickName = event.target.value
         } else if (inputValue === "password") {
             let passowrdCheck = passwordValidation(event.target.value)
@@ -65,20 +79,21 @@ const SignUp = (props) => {
             passowrdCheck.number? setNumber("green") : setNumber("red");
             passowrdCheck.specialChar? setSpecialChar("green") : setSpecialChar("red");
             signUpData.password = event.target.value
-        }
-        // console.log(signUpFormValidation(signUpData))
+        } else if (inputValue === "confirmPassword"){
+            confirmPasswordValidation(signUpData.password, event.target.value)? setConfirmPasswordError(false) : setConfirmPasswordError({ content: 'Password does not match', pointing: 'below' })
+            signUpData.confirmPassword = event.target.value
+        }        
         setIsDisabled(!signUpFormValidation(signUpData))
-
     }
-
-
+    console.log(signUpData)
+    console.log(isDisabled)
     return(
         <Grid.Column style={{ maxWidth: 450 }}>
             <Dimmer active={loadingState}>
                 <Loader content='Loading' />
             </Dimmer>
             <Form inverted onSubmit={handleSubmit}>
-                <Segment className="transparent" >
+                <Segment className="transparent" textAlign="left">
                     <Form.Field>
                         <Header inverted className="textColor" as='h2' textAlign='center'>
                             Sign Up
@@ -92,6 +107,7 @@ const SignUp = (props) => {
                         icon='user'
                         iconPosition='left'
                         placeholder='Username'
+                        error={userIdError}
                         onChange={(event) => {setUserId(event.target.value); validation(event)}}
                     />
                     <Form.Input
@@ -102,6 +118,7 @@ const SignUp = (props) => {
                         icon='user outline'
                         iconPosition='left'
                         placeholder='Nick Name'
+                        error={nickNameError}
                         onChange={(event) => {setNickName(event.target.value); validation(event)}}
                     />
                     <Form.Input
@@ -117,22 +134,23 @@ const SignUp = (props) => {
                         onChange={(event) => {setPassword(event.target.value); validation(event)}}
                     />
                     <Segment textAlign='left' className={showHide} >
-                        <Header inverted as='h4'color={eightCharacter}>At least 8 characters long</Header>
-                        <Header inverted as='h4'color={upperCase}>Have at least one upper case character</Header>
-                        <Header inverted as='h4'color={lowerCase}>Have at least one lower case character</Header>
-                        <Header inverted as='h4'color={number}>Have at least one number</Header>
-                        <Header inverted as='h4'color={specialChar}>Have at least one *@!#%&()^~</Header>
+                        <Header inverted as='h4'color={eightCharacter}>The password should be at least 8 characters</Header>
+                        <Header inverted as='h4'color={upperCase}>The password should contains at least 1 upper case character</Header>
+                        <Header inverted as='h4'color={lowerCase}>The password should contains at least 1 lower case character</Header>
+                        <Header inverted as='h4'color={number}>The password should contains at least 1 number</Header>
+                        <Header inverted as='h4'color={specialChar}>The password should contains at least 1 *@!#%&()^~</Header>
                     </Segment>
                     <Form.Input
                         fluid
                         required
                         label="Confirm Password"
-                        name="password"
+                        name="confirmPassword"
                         icon='lock'
                         iconPosition='left'
-                        placeholder='Confirm Password'
+                        placeholder='Confirm Password' 
                         type='password'
-                        onChange={(event) => setPasswordConfirmation(event.target.value)}
+                        error={confirmPasswordError}
+                        onChange={(event) => {setPasswordConfirmation(event.target.value); validation(event)}}
                     />
                     <Button inverted disabled={isDisabled} fluid size='large'>
                         Sign Up
@@ -144,7 +162,8 @@ const SignUp = (props) => {
 }
 
 const mapDispatchToProps = {
-    signUp
+    signUp,
+    logInFromState
 }
 
 export default withRouter(connect(

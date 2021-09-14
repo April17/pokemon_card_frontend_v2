@@ -33,12 +33,4 @@ export const signUp = signUpData => dispatch => {
     }
     return fetch(`${API_ROOT}/signup`, config)
         .then(rsp => rsp.json())
-        .then(data => {
-            // localStorage.token = data.token
-            console.log(data)
-            // dispatch(actions.loginSuccess())
-        })
-        .catch(error => {
-            console.log(error)
-        })
 };
