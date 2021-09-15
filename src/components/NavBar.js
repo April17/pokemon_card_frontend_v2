@@ -30,7 +30,7 @@ const NavBar = (props) => {
     }
 
     return (
-        <Menu inverted className="navbar transparent" size='small'>
+        <Menu inverted className="navbar frostglass" size='small'>
             <Menu.Item active={false}><Image src={logo} onClick={handleClick} name="" size='mini' /></Menu.Item>
             <Menu.Item active={false}>
                 <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>

@@ -45,7 +45,7 @@ const SignUp = (props) => {
                     setLoadingState(false)
                     if(data === "UserName already exist."){
                         setIsDisabled(true)
-                        setUserIdError({ content: 'Username already exist.', pointing: 'below' })
+                        setUserIdError({ content: 'User ID already exist.' })
                     } else {
                         props.logInFromState("logIn")
                         props.history.push("/login")
@@ -67,10 +67,10 @@ const SignUp = (props) => {
     const validation = (event) => {
         let inputValue = event.target.attributes.name.nodeValue
         if(inputValue === 'userId'){
-            userIdValidation(event.target.value)? setUserIdError(false) : setUserIdError({ content: 'Please enter your Username', pointing: 'below' })
+            userIdValidation(event.target.value)? setUserIdError(false) : setUserIdError({ content: 'Please enter your User ID' })
             signUpData.userId = event.target.value
         } else if (inputValue === "nickName"){
-            nickNameValidation(event.target.value)? setNickNameError(false) : setNickNameError({ content: 'Please enter your Nickname', pointing: 'below' })
+            nickNameValidation(event.target.value)? setNickNameError(false) : setNickNameError({ content: 'Please enter your Nickname' })
             signUpData.nickName = event.target.value
         } else if (inputValue === "password") {
             let passowrdCheck = passwordValidation(event.target.value)
@@ -81,14 +81,14 @@ const SignUp = (props) => {
             passowrdCheck.specialChar? setSpecialChar("green") : setSpecialChar("red");
             signUpData.password = event.target.value
         } else if (inputValue === "confirmPassword"){
-            confirmPasswordValidation(signUpData.password, event.target.value)? setConfirmPasswordError(false) : setConfirmPasswordError({ content: 'Password does not match', pointing: 'below' })
+            confirmPasswordValidation(signUpData.password, event.target.value)? setConfirmPasswordError(false) : setConfirmPasswordError({ content: 'Password does not match' })
             signUpData.confirmPassword = event.target.value
         }        
         setIsDisabled(!signUpFormValidation(signUpData))
     }
 
     return(
-        <Grid.Column style={{ maxWidth: 450 }}>
+        <Grid.Column style={{ maxWidth: 1000 }}>
             <Dimmer active={loadingState}>
                 <Loader content='Loading' />
             </Dimmer>
@@ -99,28 +99,30 @@ const SignUp = (props) => {
                             Sign Up
                         </Header>
                     </Form.Field>
-                    <Form.Input
-                        fluid
-                        required
-                        label="Username"
-                        name="userId"
-                        icon='user'
-                        iconPosition='left'
-                        placeholder='Username'
-                        error={userIdError}
-                        onChange={(event) => {setUserId(event.target.value); validation(event)}}
-                    />
-                    <Form.Input
-                        fluid
-                        required
-                        label="Nick Name"
-                        name="nickName"
-                        icon='user outline'
-                        iconPosition='left'
-                        placeholder='Nick Name'
-                        error={nickNameError}
-                        onChange={(event) => {setNickName(event.target.value); validation(event)}}
-                    />
+                    <Form.Group widths='equal'>
+                        <Form.Input
+                            fluid
+                            required
+                            label="User ID"
+                            name="userId"
+                            icon='user'
+                            iconPosition='left'
+                            placeholder='User ID'
+                            error={userIdError}
+                            onChange={(event) => {setUserId(event.target.value); validation(event)}}
+                        />
+                        <Form.Input
+                            fluid
+                            required
+                            label="Nickname"
+                            name="nickName"
+                            icon='user outline'
+                            iconPosition='left'
+                            placeholder='Nickname'
+                            error={nickNameError}
+                            onChange={(event) => {setNickName(event.target.value); validation(event)}}
+                        />
+                    </Form.Group>
                     <Form.Input
                         fluid
                         required
