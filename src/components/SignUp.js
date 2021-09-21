@@ -136,11 +136,11 @@ const SignUp = (props) => {
                         onChange={(event) => {setPassword(event.target.value); validation(event)}}
                     />
                     <Segment textAlign='left' className={showHide} >
-                        <Header inverted as='h4'color={eightCharacter}>The password should be at least 8 characters</Header>
-                        <Header inverted as='h4'color={upperCase}>The password should contains at least 1 upper case character</Header>
-                        <Header inverted as='h4'color={lowerCase}>The password should contains at least 1 lower case character</Header>
-                        <Header inverted as='h4'color={number}>The password should contains at least 1 number</Header>
-                        <Header inverted as='h4'color={specialChar}>The password should contains at least 1 *@!#%&()^~</Header>
+                        <Header inverted as='h5'color={eightCharacter}>The password should be at least 8 characters</Header>
+                        <Header inverted as='h5'color={upperCase}>The password should contains at least 1 upper case character</Header>
+                        <Header inverted as='h5'color={lowerCase}>The password should contains at least 1 lower case character</Header>
+                        <Header inverted as='h5'color={number}>The password should contains at least 1 number</Header>
+                        <Header inverted as='h5'color={specialChar}>The password should contains at least 1 *@!#%&()^~</Header>
                     </Segment>
                     <Form.Input
                         fluid
