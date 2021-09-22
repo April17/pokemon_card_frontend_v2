@@ -1,7 +1,14 @@
 .first-row {
     top: 65px; 
     height: 501px;
+    margin-bottom: 125px;
 }
-.row-height {
+.third-height {
     height: 167px !important;
+}
+.banner-height {
+    height: 501px !important;
+}
+.no-bottom-margin {
+    margin-bottom: 0px !important;
 }

@@ -55,9 +55,8 @@ const NavBar = (props) => {
                         </Menu.Item>
                     )
                 }
-
-
             </Menu.Menu>
+            <Menu.Item active={false}></Menu.Item>
         </Menu>
     )
 }

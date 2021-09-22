@@ -33,35 +33,50 @@ const Frontpage = (props) => {
 
     return(
         <Grid textAlign='center' style={{ height: '100vh' }} >
-            <Grid.Row className="first-row" >
+            <Grid.Row className="first-row">
                 <Grid.Column width={1}></Grid.Column>
                 <Grid.Column  width={9}>
-                    <Image src={TPG_2} size='big' centered/>
+                <Segment className="frostglass" >
+                    <Image className="banner-height" src={TPG_2}  fluid centered/>
+                    </Segment> 
                 </Grid.Column>
                 <Grid.Column  width={5}>
-                    <Grid.Row><Image className="row-height" src={TPG} fluid centered/></Grid.Row>
-                    <Grid.Row><Image className="row-height" src={TPG} fluid centered/></Grid.Row>
-                    <Grid.Row><Image className="row-height" src={TPG} fluid centered/></Grid.Row>
+                    <Segment className="frostglass no-bottom-margin" >
+                        <Image className="third-height" src={TPG} fluid centered/>
+                        <Image className="third-height" src={TPG} fluid centered/>
+                        <Image className="third-height" src={TPG} fluid centered/>
+                    </Segment>  
                 </Grid.Column>
                 <Grid.Column width={1}></Grid.Column>
-            </Grid.Row>
-            <Grid.Row >
-                <Grid.Column width={1}></Grid.Column>
-                <Grid.Column width={14} textAlign='left' verticalAlign='bottom'>
-                    <Header inverted as='h2'> Featured </Header>
-                </Grid.Column>
-                <Grid.Column width={1}></Grid.Column>
-            </Grid.Row>   
-            <Grid.Row>
-                
-                <Grid.Column width={1}></Grid.Column>
-                <Grid.Column width={14}>
+            </Grid.Row>  
+            <Grid.Row stretched>
+                <Grid.Column width={1}><Segment className="transparent" /></Grid.Column>
+                <Grid.Column width={10}>
+                    <Header inverted as='h2' textAlign='left'> Featured </Header>
                     <Segment className="frostglass" >
                         <PhotoSlider data={data.data}/>
-                    </Segment>    
+                    </Segment>
+                    <Header inverted as='h2' textAlign='left'> Featured </Header>
+                    <Segment className="frostglass" >
+                        <PhotoSlider data={data.data}/>
+                    </Segment> 
+                    <Segment className="frostglass" >
+                        <PhotoSlider data={data.data}/>
+                    </Segment> 
+                    <Segment className="frostglass" >
+                        <PhotoSlider data={data.data}/>
+                    </Segment> 
+                    <Segment className="frostglass" >
+                        <PhotoSlider data={data.data}/>
+                    </Segment>     
                 </Grid.Column>
-                <Grid.Column width={1}></Grid.Column>
-            </Grid.Row>
+                <Grid.Column width={4}>
+                    <Segment className="frostglass" >
+                        
+                    </Segment> 
+                </Grid.Column>
+                <Grid.Column width={1}><Segment className="transparent" /></Grid.Column>
+            </Grid.Row>  
         </Grid>
     )
 
