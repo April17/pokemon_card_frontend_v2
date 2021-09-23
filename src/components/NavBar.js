@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Image } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Image, Icon, Label } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
@@ -30,12 +30,18 @@ const NavBar = (props) => {
     }
 
     return (
-        <Menu inverted className="navbar frostglass" size='small'>
+        <Menu inverted className="navbar" size='small'>
             <Menu.Item active={false}><Image src={logo} onClick={handleClick} name="" size='mini' /></Menu.Item>
             <Menu.Item active={false}>
                 <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
             </Menu.Item> 
             <Menu.Menu position='right'>
+                <Menu.Item>
+                    <Icon name='shopping cart icon' size='big' inverted/>
+                    <Label color='red' inverted>
+                        0
+                    </Label>
+                </Menu.Item>
                 {
                     localStorage.token? 
                     (

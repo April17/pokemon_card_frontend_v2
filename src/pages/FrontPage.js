@@ -5,6 +5,7 @@ import PhotoSlider from '../components/PhotoSlider'
 import TPG from '../assets/Image/illustration-contest-169.jpg'
 import TPG_2 from '../assets/Image/25th_promo_2x_optimized.png'
 import '../assets/style/FrontPage.css'
+import Card from '../components/Card'
 
 
 
@@ -21,7 +22,7 @@ const Frontpage = (props) => {
                 'X-Api-Key': 'fab1100e-a24f-425c-a0f9-610eced48d67'
               }
         }
-        return fetch(`https://api.pokemontcg.io/v2/cards?q=name:"Celebi"&pageSize=20`, config)
+        return fetch(`https://api.pokemontcg.io/v2/cards?q=name:"Sylveon"&pageSize=20`, config)
             .then(rsp => rsp.json())
             .then(data => {
                 setData(data)
@@ -61,18 +62,18 @@ const Frontpage = (props) => {
                         <PhotoSlider data={data.data}/>
                     </Segment> 
                     <Segment className="frostglass" >
-                        <PhotoSlider data={data.data}/>
+                        
                     </Segment> 
                     <Segment className="frostglass" >
-                        <PhotoSlider data={data.data}/>
+                       
                     </Segment> 
                     <Segment className="frostglass" >
-                        <PhotoSlider data={data.data}/>
+                        
                     </Segment>     
                 </Grid.Column>
                 <Grid.Column width={4}>
                     <Segment className="frostglass" >
-                        
+
                     </Segment> 
                 </Grid.Column>
                 <Grid.Column width={1}><Segment className="transparent" /></Grid.Column>
