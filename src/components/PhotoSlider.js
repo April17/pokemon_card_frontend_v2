@@ -1,8 +1,8 @@
 import React from 'react'
 // import { connect } from "react-redux"
-import { Dimmer, Loader } from 'semantic-ui-react'
+// import { Dimmer, Icon } from 'semantic-ui-react'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/splide/dist/css/themes/splide-default.min.css';
+import '@splidejs/splide/dist/css/themes/splide-skyblue.min.css'
 import Card from './Card'
 
 const PhotoSlider = (props) => {
@@ -21,7 +21,7 @@ const PhotoSlider = (props) => {
         <Splide 
             options={ {
                 rewind : true,
-                height : 450,
+                height : 420,
                 perPage : 6,
                 heightRatio : 0.3,
                 gap : '1rem',
@@ -30,9 +30,6 @@ const PhotoSlider = (props) => {
                 genSlide(props) 
                 : 
                 <SplideSlide>
-                    <Dimmer active>
-                        <Loader>Loading</Loader>
-                    </Dimmer>
                 </SplideSlide>
             }
         </Splide>

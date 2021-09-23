@@ -1,15 +1,38 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Image, Header, Button, Label } from 'semantic-ui-react'
-import Image2 from '../assets/Image/1_hires_small.png'
+import { Image, Header, Button } from 'semantic-ui-react'
 
 
 
 
 const Card = (props) => {
 
-    console.log(props.cardData)
+    // console.log(props.cardData)
     const data = props.cardData
+
+    const nameFormat = (name) => {
+        
+        if(name.length <= 16){
+            return (
+                <div style={{"height":"46px"}}>
+                    <Header inverted as='h3' textAlign='center'>{name}</Header>
+                </div>
+            )
+        } else if (name.length >= 24){
+            return (
+                <div style={{"height":"46px"}}>
+                    <Header inverted as='h3' textAlign='center'>{name.substring(0,20)+"..."}</Header>
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Header inverted as='h3' textAlign='center'>{name}</Header>
+                </div>
+            )
+        }
+    }
+
     return(
         <div className="ui link cards">
             <div className="card transparent">
@@ -18,13 +41,13 @@ const Card = (props) => {
                 </div>
                 <div className="content">
                     <div className="header">
-                        <Header inverted as='h3' textAlign='center'>{data.name}</Header>
+                        {nameFormat(data.name)}
                     </div>
-                    <div className="meta">
+                    {/* <div className="meta">
                         
-                    </div>
+                    </div> */}
                     <div className="description">
-                        <Header inverted as='h4' textAlign='center'>Price: ${data.cardmarket.prices.averageSellPrice}</Header>
+                        <Header inverted as='h4' textAlign='center'>Price: ${data.cardmarket.prices.trendPrice}</Header>
                     </div>
                 </div>
                 <div className="extra content">

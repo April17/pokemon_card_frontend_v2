@@ -37,8 +37,8 @@ const NavBar = (props) => {
             </Menu.Item> 
             <Menu.Menu position='right'>
                 <Menu.Item>
-                    <Icon name='shopping cart icon' size='big' inverted/>
-                    <Label color='red' inverted>
+                    <Icon name='shopping cart' size='big'/>
+                    <Label color='red' circular>
                         0
                     </Label>
                 </Menu.Item>

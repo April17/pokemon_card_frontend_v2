@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Header, Segment, Message, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Form, Header, Segment, Message, Dimmer, Icon } from 'semantic-ui-react'
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { logIn } from '../redux/adapters/currentUserAdapters'
@@ -64,7 +64,7 @@ const Login = (props) => {
     return(
         <div>
             <Dimmer active={loadingState}>
-                <Loader content='Loading' />
+                <Icon loading name='spinner' size='huge' />
             </Dimmer>
             <Header className="textColor" as='h2' inverted color="grey" textAlign='center'>
                 Login to your account

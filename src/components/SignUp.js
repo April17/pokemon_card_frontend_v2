@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Segment, Dimmer, Loader } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Segment, Dimmer, Icon } from 'semantic-ui-react'
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { signUp } from '../redux/adapters/currentUserAdapters'
@@ -90,7 +90,7 @@ const SignUp = (props) => {
     return(
         <Grid.Column style={{ maxWidth: 1000 }}>
             <Dimmer active={loadingState}>
-                <Loader content='Loading' />
+                <Icon loading name='spinner' size='huge' />
             </Dimmer>
             <Form inverted onSubmit={handleSubmit}>
                 <Segment className="transparent" textAlign="left">
