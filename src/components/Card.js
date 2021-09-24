@@ -37,7 +37,7 @@ const Card = (props) => {
         <div className="ui link cards">
             <div className="card transparent">
                 <div className="image">
-                    <Image src={data.images.small} size='small' centered />
+                    <Image src={data.images.large} size='small' centered />
                 </div>
                 <div className="content">
                     <div className="header">
@@ -47,7 +47,7 @@ const Card = (props) => {
                         
                     </div> */}
                     <div className="description">
-                        <Header inverted as='h4' textAlign='center'>Price: ${data.cardmarket.prices.trendPrice}</Header>
+                        <Header inverted as='h4' textAlign='center'>${data.cardmarket.prices.trendPrice}</Header>
                     </div>
                 </div>
                 <div className="extra content">

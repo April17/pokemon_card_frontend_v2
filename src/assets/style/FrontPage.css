@@ -4,11 +4,19 @@
     margin-bottom: 125px;
 }
 .third-height {
-    height: 167px !important;
+    height: 250px !important;
 }
 .banner-height {
-    height: 501px !important;
+    height: 500px !important;
 }
 .no-bottom-margin {
     margin-bottom: 0px !important;
+}
+
+.splide__arrow:hover svg {
+    fill: #00bfff
+}
+
+.splide__arrow svg {
+    fill: white
 }

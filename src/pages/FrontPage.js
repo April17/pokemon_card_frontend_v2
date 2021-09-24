@@ -1,11 +1,11 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Header, Image, Grid, Segment, Dimmer, Icon } from 'semantic-ui-react'
+import { Header, Image, Grid, Segment, Dimmer, Icon, Rail } from 'semantic-ui-react'
 import PhotoSlider from '../components/PhotoSlider'
-import BannerSmall1 from '../assets/Image/illustration-contest-169.jpg'
+import BannerSmall1 from '../assets/Image/swsh08_logo_169_en.png'
 import BannerSmall2 from '../assets/Image/swsh07en.jpg'
 import BannerSmall3 from '../assets/Image/swsh07-card-highlights-169-en.jpg'
-import BannerLarge from '../assets/Image/25th_promo_2x_optimized.png'
+import BannerLarge from '../assets/Image/swsh07-card-highlights-169-en.jpg'
 import '../assets/style/FrontPage.css'
 
 
@@ -37,14 +37,17 @@ const Frontpage = (props) => {
         <Grid textAlign='center' style={{ height: '100vh' }} >
             <Grid.Row className="first-row">
                 <Grid.Column width={1}></Grid.Column>
-                <Grid.Column  width={9}>
-                <Segment className="frostglass" >
-                    <Image className="banner-height" src={BannerLarge}  fluid centered/>
+                <Grid.Column  width={8}>
+                    <Segment className="frostglass" textAlign='right'>
+                        <Image className="banner-height" src={BannerLarge} spaced='right'/>
+                        <Rail internal position='left' size='huge' >
+                            <Segment>Left Rail Content</Segment>
+                        </Rail>
                     </Segment> 
                 </Grid.Column>
-                <Grid.Column  width={5}>
+                <Grid.Column  width={6}>
                     <Segment className="frostglass no-bottom-margin" >
-                        <Image className="third-height" src={BannerSmall1} fluid centered/>
+                        
                         <Image className="third-height" src={BannerSmall2} fluid centered/>
                         <Image className="third-height" src={BannerSmall3} fluid centered/>
                     </Segment>  
@@ -61,7 +64,7 @@ const Frontpage = (props) => {
                         </Dimmer>
                         <PhotoSlider data={data.data}/>
                     </Segment>
-                    <Header inverted as='h2' textAlign='left'> Featured </Header>
+                    <Header inverted as='h2' textAlign='left'> Recommended </Header>
                     <Segment className="frostglass" >
                         <Dimmer active={ data.data? false:true }>
                             <Icon loading name='spinner' size='huge' />
