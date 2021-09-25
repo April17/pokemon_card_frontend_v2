@@ -2,7 +2,8 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Header, Image, Grid, Segment, Dimmer, Icon, Rail } from 'semantic-ui-react'
 import PhotoSlider from '../components/PhotoSlider'
-import BannerSmall1 from '../assets/Image/swsh08_logo_169_en.png'
+import { frontPageFeaturedCard, frontPageRecommendedCard } from '../redux/adapters/frontPageAdapters'
+// import BannerSmall1 from '../assets/Image/swsh08_logo_169_en.png'
 import BannerSmall2 from '../assets/Image/swsh07en.jpg'
 import BannerSmall3 from '../assets/Image/swsh07-card-highlights-169-en.jpg'
 import BannerLarge from '../assets/Image/swsh07-card-highlights-169-en.jpg'
@@ -12,83 +13,68 @@ import '../assets/style/FrontPage.css'
 
 const Frontpage = (props) => {
 
-    const [data, setData] = React.useState({})
-
     React.useEffect(() => {
-        const config = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'X-Api-Key': 'fab1100e-a24f-425c-a0f9-610eced48d67'
-              }
-        }
-        return fetch(`https://api.pokemontcg.io/v2/cards?q=name:"Rayquaza"&pageSize=12`, config)
-            .then(rsp => rsp.json())
-            .then(data => {
-                setData(data)
-            })
-            .catch(error => {
-                console.log("Error: ", error)
-            })
-    }, [])
+        props.frontPageFeaturedCard()
+        props.frontPageRecommendedCard()
+    }, [props.frontPageFeaturedCard, props.frontPageRecommendedCard])
 
     return(
-        <Grid textAlign='center' style={{ height: '100vh' }} >
-            <Grid.Row className="first-row">
-                <Grid.Column width={1}></Grid.Column>
-                <Grid.Column  width={8}>
-                    <Segment className="frostglass" textAlign='right'>
-                        <Image className="banner-height" src={BannerLarge} spaced='right'/>
-                        <Rail internal position='left' size='huge' >
-                            <Segment>Left Rail Content</Segment>
-                        </Rail>
-                    </Segment> 
-                </Grid.Column>
-                <Grid.Column  width={6}>
-                    <Segment className="frostglass no-bottom-margin" >
+        <div className='page'>
+            <Grid textAlign='center' style={{ height: '100vh' }} >
+                <Grid.Row className="first-row">
+                    
+                    <Grid.Column  width={10}>
+                        <Segment className="frostglass" textAlign='center' >
+                            <Image className="banner-height" src={BannerLarge} spaced='right'/>
+                            <Rail internal attached position='left' size='huge' id='rail'>
+                                <Segment className='frostglass' id='rail-segment'>
+                                    <Header as='h2'> Sword & Shield</Header>
+                                    <Header as='h2'> Evolving Skies</Header>
+                                </Segment>
+                            </Rail>
+                        </Segment> 
+                    </Grid.Column>
+                    <Grid.Column  width={6}>
+                        <Segment className="frostglass no-bottom-margin" >
+                            <Image className="third-height" src={BannerSmall2} fluid centered/>
+                            <Image className="third-height" src={BannerSmall3} fluid centered/>
+                        </Segment>  
+                    </Grid.Column>
+                </Grid.Row>  
+                <Grid.Row stretched>
+                    <Grid.Column width={16}>
+                        <Header inverted as='h2' textAlign='left'> Featured </Header>
+                        <Segment className="frostglass" >
+                            <Dimmer active={ (props.featuredData.length !== 0)? false:true }>
+                                <Icon loading name='spinner' size='huge' />
+                            </Dimmer>
+                            <PhotoSlider data={props.featuredData}/>
+                        </Segment>
+                        <Header inverted as='h2' textAlign='left'> Recommended </Header>
+                        <Segment className="frostglass" textAlign='center'>
+                            <Dimmer active={ (props.recommendedData.length !== 0)? false:true }>
+                                <Icon loading name='spinner' size='huge' />
+                            </Dimmer>
+                            <PhotoSlider data={props.recommendedData}/>
+                        </Segment> 
+                        <Segment className="frostglass" >
+                            
+                        </Segment> 
+                        <Segment className="frostglass" >
                         
-                        <Image className="third-height" src={BannerSmall2} fluid centered/>
-                        <Image className="third-height" src={BannerSmall3} fluid centered/>
-                    </Segment>  
-                </Grid.Column>
-                <Grid.Column width={1}></Grid.Column>
-            </Grid.Row>  
-            <Grid.Row stretched>
-                <Grid.Column width={1}><Segment className="transparent" /></Grid.Column>
-                <Grid.Column width={10}>
-                    <Header inverted as='h2' textAlign='left'> Featured </Header>
-                    <Segment className="frostglass" >
-                        <Dimmer active={ data.data? false:true }>
-                            <Icon loading name='spinner' size='huge' />
-                        </Dimmer>
-                        <PhotoSlider data={data.data}/>
-                    </Segment>
-                    <Header inverted as='h2' textAlign='left'> Recommended </Header>
-                    <Segment className="frostglass" >
-                        <Dimmer active={ data.data? false:true }>
-                            <Icon loading name='spinner' size='huge' />
-                        </Dimmer>
-                        <PhotoSlider data={data.data}/>
-                    </Segment> 
-                    <Segment className="frostglass" >
-                        
-                    </Segment> 
-                    <Segment className="frostglass" >
-                       
-                    </Segment> 
-                    <Segment className="frostglass" >
-                        
-                    </Segment>     
-                </Grid.Column>
-                <Grid.Column width={4}>
-                    <Segment className="frostglass" >
+                        </Segment> 
+                        <Segment className="frostglass" >
+                            
+                        </Segment>     
+                    </Grid.Column>
+                    {/* <Grid.Column width={5}>
+                        <Segment className="frostglass" >
 
-                    </Segment> 
-                </Grid.Column>
-                <Grid.Column width={1}><Segment className="transparent" /></Grid.Column>
-            </Grid.Row>  
-        </Grid>
+                        </Segment> 
+                    </Grid.Column> */}
+                </Grid.Row>  
+            </Grid>
+        </div>
     )
 
 
@@ -96,12 +82,14 @@ const Frontpage = (props) => {
 
 const mapStateToProps = state => {
     return {
-      
+      featuredData: state.frontPageReducers.featuredData,
+      recommendedData: state.frontPageReducers.recommendedData
     }
 }
 
 const mapDispatchToProps = {
-    
+    frontPageFeaturedCard,
+    frontPageRecommendedCard
 }
 
 export default connect(

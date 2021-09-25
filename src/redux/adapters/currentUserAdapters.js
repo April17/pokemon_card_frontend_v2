@@ -11,7 +11,6 @@ export const logIn = logInData => dispatch => {
     return fetch(`${API_ROOT}/login`, config)
         .then(rsp => rsp.json())
         .then(data => {
-            console.log(data)
             if(data.token){
                 localStorage.token = data.token
                 dispatch(actions.loginSuccess(data.userId))

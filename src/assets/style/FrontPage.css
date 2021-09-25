@@ -20,3 +20,17 @@
 .splide__arrow svg {
     fill: white
 }
+
+#rail {
+    position: relative;
+}
+
+#rail-segment {
+    position: absolute; 
+    bottom: 0;
+}
+
+.page {
+    max-width: 1440px;
+    margin: auto;
+}

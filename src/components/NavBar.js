@@ -31,17 +31,13 @@ const NavBar = (props) => {
 
     return (
         <Menu inverted className="navbar" size='small'>
-            <Menu.Item active={false}><Image src={logo} onClick={handleClick} name="" size='mini' /></Menu.Item>
+            <Menu.Item >
+                <Image src={logo} onClick={handleClick} name="" size='mini' />
+            </Menu.Item>
             <Menu.Item active={false}>
                 <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
             </Menu.Item> 
             <Menu.Menu position='right'>
-                <Menu.Item>
-                    <Icon name='shopping cart' size='big'/>
-                    <Label color='red' circular>
-                        0
-                    </Label>
-                </Menu.Item>
                 {
                     localStorage.token? 
                     (
@@ -61,6 +57,11 @@ const NavBar = (props) => {
                         </Menu.Item>
                     )
                 }
+                <Menu.Item>
+                    <Label className='transparent' as='a'>
+                        <Icon name='shopping cart' size='big'/>0
+                    </Label>
+                </Menu.Item>
             </Menu.Menu>
             <Menu.Item active={false}></Menu.Item>
         </Menu>

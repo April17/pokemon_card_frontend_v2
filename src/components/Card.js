@@ -34,7 +34,7 @@ const Card = (props) => {
     }
 
     return(
-        <div className="ui link cards">
+        <div className="ui link cards center">
             <div className="card transparent">
                 <div className="image">
                     <Image src={data.images.large} size='small' centered />
