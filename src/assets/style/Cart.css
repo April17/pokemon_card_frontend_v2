@@ -1,0 +1,13 @@
+#cart {
+    background-color: black;
+    height: 95vh;
+}
+.card-content{
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+}
+.botton-right{
+    position: absolute !important; 
+    bottom: 0;
+    right: 0;
+}

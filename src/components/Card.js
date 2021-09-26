@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { Image, Header, Button } from 'semantic-ui-react'
+import { addToCart } from '../redux/adapters/cartAdapters'
 
 
 
@@ -10,8 +11,7 @@ const Card = (props) => {
     // console.log(props.cardData)
     const data = props.cardData
 
-    const nameFormat = (name) => {
-        
+    const nameFormat = (name) => {   
         if(name.length <= 16){
             return (
                 <div style={{"height":"46px"}}>
@@ -33,6 +33,10 @@ const Card = (props) => {
         }
     }
 
+    const handleClick = () => {
+        props.addToCart(data)
+    }
+
     return(
         <div className="ui link cards center">
             <div className="card transparent">
@@ -43,21 +47,14 @@ const Card = (props) => {
                     <div className="header">
                         {nameFormat(data.name)}
                     </div>
-                    {/* <div className="meta">
-                        
-                    </div> */}
                     <div className="description">
                         <Header inverted as='h4' textAlign='center'>${data.cardmarket.prices.trendPrice}</Header>
                     </div>
                 </div>
                 <div className="extra content">
                     <span className="center floated">
-                        <Button inverted>Add to Cart</Button>
+                        <Button onClick={handleClick} inverted>Add to Cart</Button>
                     </span>
-                    {/* <span>
-                        <i className="user icon"></i>
-                        75 Friends
-                    </span> */}
                 </div>
             </div>
         </div>
@@ -73,7 +70,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    
+    addToCart
 }
 
 export default connect(

@@ -1,10 +1,11 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Image, Icon, Label } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Image } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
+import Cart from './Cart'
 
 
 
@@ -57,11 +58,7 @@ const NavBar = (props) => {
                         </Menu.Item>
                     )
                 }
-                <Menu.Item>
-                    <Label className='transparent' as='a'>
-                        <Icon name='shopping cart' size='big'/>0
-                    </Label>
-                </Menu.Item>
+                <Cart/>
             </Menu.Menu>
             <Menu.Item active={false}></Menu.Item>
         </Menu>

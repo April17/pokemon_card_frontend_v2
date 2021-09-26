@@ -51,3 +51,7 @@
 .hide {
   display: none;
 }
+
+.no-padding {
+  padding: 0px !important;
+}
