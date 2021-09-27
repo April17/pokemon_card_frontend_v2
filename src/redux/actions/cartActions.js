@@ -1,3 +1,3 @@
 export const actions = {
-    addToCart: (itemData) => ({ type: "ADD_TO_CART", payload: itemData })
+    addToCart: (cartData) => ({ type: "ADD_TO_CART", payload: cartData })
 };

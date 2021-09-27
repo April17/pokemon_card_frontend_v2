@@ -1,12 +1,10 @@
 import React from 'react'
 import { connect } from "react-redux"
 import { Image, Card, Button, Header, Grid, Segment } from 'semantic-ui-react'
-import Image1 from '../assets/Image/1_hires_small.png'
 
 
 const CartCard = (props) => {
     
-    console.log(props)
     const itemData = props.data
 
     return(
@@ -20,7 +18,7 @@ const CartCard = (props) => {
                         <Grid.Row>
                             <Header as='h4' inverted> {itemData.name} </Header>
                             <Header className='card-content' as='h5' inverted > ${itemData.cardmarket.prices.trendPrice} </Header>
-                            <Header className='card-content' as='h5' inverted> Qty:  </Header>
+                            <Header className='card-content' as='h5' inverted> Qty: {itemData.qty}</Header>
                         </Grid.Row>
                         <Grid.Row verticalAlign='bottom' textAlign='right' >
                             <Segment className='transparent botton-right'>

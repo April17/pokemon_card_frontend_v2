@@ -1,7 +1,8 @@
-import { API_ROOT, HEADERS } from '../../assets/API_Route';
+// import { API_ROOT, HEADERS } from '../../assets/API_Route';
 import { actions } from "../actions/cartActions";
 
 
-export const addToCart = itemData => dispatch => {
-    dispatch(actions.addToCart(itemData))
+export const addToCart = cartData => dispatch => {
+    localStorage.cart = JSON.stringify(cartData)
+    dispatch(actions.addToCart(cartData))
 };

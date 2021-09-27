@@ -8,8 +8,7 @@ import { addToCart } from '../redux/adapters/cartAdapters'
 
 const Card = (props) => {
 
-    // console.log(props.cardData)
-    const data = props.cardData
+    const data = {...props.cardData, qty: 1}
 
     const nameFormat = (name) => {   
         if(name.length <= 16){
@@ -34,7 +33,14 @@ const Card = (props) => {
     }
 
     const handleClick = () => {
-        props.addToCart(data)
+        let cartData = [...props.cartItems]
+        const itemIndex = props.cartItems.findIndex(item => item.id === data.id)
+        if (itemIndex === -1){
+            cartData.push(data)
+        } else {
+            cartData[itemIndex].qty += 1
+        }
+        props.addToCart(cartData)
     }
 
     return(
@@ -65,7 +71,7 @@ const Card = (props) => {
 
 const mapStateToProps = state => {
     return {
-      
+        cartItems: state.cartReducers.cart
     }
 }
 

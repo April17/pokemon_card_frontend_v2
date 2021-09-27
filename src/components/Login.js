@@ -13,12 +13,12 @@ const Login = (props) => {
     const [rememberMe, setRememberMe] = React.useState(false)
 
     React.useEffect(() => {
-        if(localStorage.rememberMe === "true"){
-            setRememberMe((localStorage.rememberMe==="true"))
-            setUserId(localStorage.userId)
-        } else {
-            setRememberMe(!(localStorage.rememberMe==="false"))
+        if(localStorage.rememberMe === "false" || !localStorage.rememberMe){
+            setRememberMe(false)
             localStorage.userId = ""
+        } else {
+            setRememberMe(true)
+            setUserId(localStorage.userId)
         }
     }, [])
 

@@ -16,7 +16,7 @@ const Frontpage = (props) => {
     React.useEffect(() => {
         props.frontPageFeaturedCard()
         props.frontPageRecommendedCard()
-    }, [props.frontPageFeaturedCard, props.frontPageRecommendedCard])
+    }, [])
 
     return(
         <div className='page'>
@@ -67,11 +67,6 @@ const Frontpage = (props) => {
                             
                         </Segment>     
                     </Grid.Column>
-                    {/* <Grid.Column width={5}>
-                        <Segment className="frostglass" >
-
-                        </Segment> 
-                    </Grid.Column> */}
                 </Grid.Row>  
             </Grid>
         </div>
