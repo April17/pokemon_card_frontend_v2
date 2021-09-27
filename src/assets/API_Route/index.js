@@ -1,4 +1,4 @@
-export const API_ROOT = 'https://4dglllmbi9.execute-api.us-east-2.amazonaws.com/Prod';
+export const API_ROOT = 'https://rme6gmliz1.execute-api.us-east-2.amazonaws.com/Prod';
 export const POKEMON_API_ROOT = 'https://api.pokemontcg.io/v2/'
 export const HEADERS = {
   'Content-Type': 'application/json',
