@@ -1,14 +1,16 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Image, Header, Button } from 'semantic-ui-react'
-import { addToCart } from '../redux/adapters/cartAdapters'
+import { Image, Header, Button, Grid } from 'semantic-ui-react'
+import { editCart } from '../redux/adapters/cartAdapters'
 
 
 
 
 const Card = (props) => {
 
-    const data = {...props.cardData, qty: 1}
+    let [qty, setQty] = React.useState(1)
+
+    const data = {...props.cardData, qty: 0}
 
     const nameFormat = (name) => {   
         if(name.length <= 16){
@@ -36,13 +38,24 @@ const Card = (props) => {
         let cartData = [...props.cartItems]
         const itemIndex = props.cartItems.findIndex(item => item.id === data.id)
         if (itemIndex === -1){
+            data.qty = qty
             cartData.push(data)
         } else {
-            cartData[itemIndex].qty += 1
+            cartData[itemIndex].qty += qty
         }
-        props.addToCart(cartData)
+        setQty(1)
+        props.editCart(cartData)
     }
 
+    const handleQty = (event) => {
+        if (event.currentTarget.name === "plus") {
+            setQty(qty+=1)
+        } else if (event.currentTarget.name === "minus" && qty > 1){
+            setQty(qty-=1)
+        }
+    }
+
+    
     return(
         <div className="ui link cards center">
             <div className="card transparent">
@@ -52,6 +65,21 @@ const Card = (props) => {
                 <div className="content">
                     <div className="header">
                         {nameFormat(data.name)}
+                    </div>
+                    <div className="meta">
+                        <Grid columns='equal'>
+                            <Grid.Row>
+                            <Grid.Column floated='left' textAlign='right' >
+                                <Button name="plus" icon='plus' size='tiny' onClick={handleQty} inverted circular/>
+                            </Grid.Column>
+                            <Grid.Column textAlign='center' width={2}>
+                                <Header inverted className='qty' as='h4' textAlign='center' >{qty}</Header>
+                            </Grid.Column>
+                            <Grid.Column floated='right' textAlign='left' >
+                                <Button name="minus" icon='minus' size='tiny' onClick={handleQty} inverted circular/>
+                            </Grid.Column>
+                            </Grid.Row>
+                        </Grid>
                     </div>
                     <div className="description">
                         <Header inverted as='h4' textAlign='center'>${data.cardmarket.prices.trendPrice}</Header>
@@ -76,7 +104,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    addToCart
+    editCart
 }
 
 export default connect(

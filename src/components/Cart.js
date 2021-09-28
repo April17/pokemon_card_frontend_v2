@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Header, Dropdown, Button, Segment } from 'semantic-ui-react'
-import { addToCart } from '../redux/adapters/cartAdapters'
+import { Header, Dropdown, Button, Segment, Card, Grid, Image } from 'semantic-ui-react'
+import { editCart } from '../redux/adapters/cartAdapters'
 import CartCard from './CartCard'
+import CardBack from '../assets/Image/pokemon_card_backside.png'
 import '../assets/style/Cart.css'
 
 
@@ -14,7 +15,7 @@ const Cart = (props) => {
 
     React.useEffect(() => {
       if(localStorage.cart){
-        props.addToCart(JSON.parse(localStorage.cart)) 
+        props.editCart(JSON.parse(localStorage.cart)) 
       }
   }, [])
 
@@ -40,7 +41,35 @@ const Cart = (props) => {
         <Dropdown.Menu id='cart'>
             {
               (cartItems.length === 0)? 
-              <Dropdown.Header ><Header inverted>Cart is empyt </Header></Dropdown.Header> :
+              <div>
+                <Dropdown.Header >
+                  <Segment className='transparent' textAlign='left'>
+                    <Header inverted>Subtotal: ${calculateSubtotal()}</Header>
+                  </Segment>
+                </Dropdown.Header>
+                <Dropdown.Item >
+                  <Segment className='transparent' textAlign='right'>
+                    <Button inverted color='green'> Proceed to Checkout </Button>
+                  </Segment>
+                </Dropdown.Item>
+                <Dropdown.Divider />
+                <Dropdown.Item>
+                  <Card className='frostglass'>
+                    <Card.Content>
+                        <Grid columns={2}>
+                            <Grid.Column width={7}>
+                                <Image floated='left' fluid src={CardBack}/>
+                            </Grid.Column>
+                            <Grid.Column width={9} >
+                                <Grid.Row>
+                                    <Header as='h4' inverted> No card in cart </Header>
+                                </Grid.Row>
+                            </Grid.Column>    
+                        </Grid>
+                    </Card.Content>
+                  </Card>
+                </Dropdown.Item>
+              </div> :
               <div>
                 <Dropdown.Header >
                   <Segment className='transparent' textAlign='left'>
@@ -75,7 +104,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-  addToCart
+  editCart
 }
 
 export default connect(

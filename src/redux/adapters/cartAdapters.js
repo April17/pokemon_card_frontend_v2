@@ -2,7 +2,7 @@
 import { actions } from "../actions/cartActions";
 
 
-export const addToCart = cartData => dispatch => {
+export const editCart = cartData => dispatch => {
     localStorage.cart = JSON.stringify(cartData)
-    dispatch(actions.addToCart(cartData))
+    dispatch(actions.editCart(cartData))
 };
