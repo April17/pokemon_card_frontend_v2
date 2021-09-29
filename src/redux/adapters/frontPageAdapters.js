@@ -29,7 +29,7 @@ export const frontPageRecommendedCard = () => dispatch => {
             'X-Api-Key': API_KEY
           }
     }
-    fetch(`${POKEMON_API_ROOT}/cards?q=name:"Jirachi"&pageSize=12`, config)
+    fetch(`${POKEMON_API_ROOT}/cards?q=name:"Mew"&pageSize=12`, config)
         .then(rsp => rsp.json())
         .then(data => {
             dispatch(actions.recommendedData(data.data))

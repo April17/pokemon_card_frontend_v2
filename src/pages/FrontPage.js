@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { Header, Image, Grid, Segment, Dimmer, Icon, Rail } from 'semantic-ui-react'
 import PhotoSlider from '../components/PhotoSlider'
 import { frontPageFeaturedCard, frontPageRecommendedCard } from '../redux/adapters/frontPageAdapters'
-// import BannerSmall1 from '../assets/Image/swsh08_logo_169_en.png'
+import { getCart } from '../redux/adapters/cartAdapters'
 import BannerSmall2 from '../assets/Image/swsh07en.jpg'
 import BannerSmall3 from '../assets/Image/swsh07-card-highlights-169-en.jpg'
 import BannerLarge from '../assets/Image/swsh07-card-highlights-169-en.jpg'
@@ -16,6 +16,7 @@ const Frontpage = (props) => {
     React.useEffect(() => {
         props.frontPageFeaturedCard()
         props.frontPageRecommendedCard()
+        props.getCart()
     }, [])
 
     return(
@@ -84,7 +85,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     frontPageFeaturedCard,
-    frontPageRecommendedCard
+    frontPageRecommendedCard,
+    getCart
 }
 
 export default connect(
