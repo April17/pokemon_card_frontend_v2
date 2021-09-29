@@ -14,6 +14,9 @@ import '../assets/style/FrontPage.css'
 const Frontpage = (props) => {
 
     React.useEffect(() => {
+        if(localStorage.token){
+            props.getCart()
+        }
         props.frontPageFeaturedCard()
         props.frontPageRecommendedCard()
     }, [])
