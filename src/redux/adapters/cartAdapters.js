@@ -7,6 +7,7 @@ import { logOut } from '../../utility/utility';
 export const editCart = (cartData) => dispatch => {
   const stringify = JSON.stringify(cartData)
   localStorage.cart = stringify
+  // console.log(stringify)
   dispatch(actions.editCart(cartData))
   if(localStorage.token){
     const config = {

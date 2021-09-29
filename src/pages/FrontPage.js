@@ -16,7 +16,6 @@ const Frontpage = (props) => {
     React.useEffect(() => {
         props.frontPageFeaturedCard()
         props.frontPageRecommendedCard()
-        props.getCart()
     }, [])
 
     return(
