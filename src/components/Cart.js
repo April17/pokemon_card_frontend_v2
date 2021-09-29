@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Header, Dropdown, Button, Segment, Card, Grid, Image } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
+import { auth } from '../redux/adapters/currentUserAdapters'
 import CartCard from './CartCard'
 import CardBack from '../assets/Image/pokemon_card_backside.png'
 import '../assets/style/Cart.css'
@@ -14,6 +15,7 @@ const Cart = (props) => {
     let cartItems = props.cartItems
 
     React.useEffect(() => {
+      props.auth()
       if(localStorage.cart){
         props.editCart(JSON.parse(localStorage.cart)) 
       }
@@ -87,9 +89,6 @@ const Cart = (props) => {
                 </div>
               </div>
             }
-
-
-            <Dropdown.Item ></Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     )
@@ -99,12 +98,14 @@ const Cart = (props) => {
 
 const mapStateToProps = state => {
     return {
-      cartItems: state.cartReducers.cart
+      cartItems: state.cartReducers.cart,
+      authResponse: state.currentUserReducers.auth
     }
 }
 
 const mapDispatchToProps = {
-  editCart
+  editCart,
+  auth
 }
 
 export default connect(

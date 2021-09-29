@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Image, Card, Button, Header, Grid, Segment, Label } from 'semantic-ui-react'
+import { Image, Card, Button, Header, Grid, Segment } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
 
 

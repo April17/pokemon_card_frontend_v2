@@ -1,5 +1,6 @@
 import { API_ROOT, HEADERS } from '../../assets/API_Route';
 import { actions } from "../actions/currentUserActions";
+import { logOut  } from '../../utility/utility';
 
 
 export const logIn = logInData => dispatch => {
@@ -33,3 +34,26 @@ export const signUp = signUpData => dispatch => {
     return fetch(`${API_ROOT}/signup`, config)
         .then(rsp => rsp.json())
 };
+
+export const auth = () => dispatch => {
+    if(localStorage.token){
+        const config = {
+            method: 'GET',
+            headers: {
+                Authorization: localStorage.token
+            }
+        }
+        fetch(`${API_ROOT}/auth`, config)
+            .then(rsp => rsp.json())
+            .then(data => {
+                console.log(data)
+                dispatch(actions.auth(data.response.auth))
+            })
+            .catch(error => {
+                logOut()
+                dispatch(actions.auth(false))
+                console.log("Error: ", error)
+            })
+    }
+
+}
