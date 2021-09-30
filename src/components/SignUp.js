@@ -29,6 +29,10 @@ const SignUp = (props) => {
     const [confirmPasswordError, setConfirmPasswordError] = React.useState(false)
     const [loadingState, setLoadingState] = React.useState(false)
     const [isDisabled, setIsDisabled] = React.useState(true)
+    const [showPasswordBtn, setShowPasswordBtn] = React.useState("Show")
+    const [showPassword, setShowPassword] = React.useState("password")
+    const [showPasswordCFBtn, setShowPasswordCFBtn] = React.useState("Show")
+    const [showPasswordCF, setShowPasswordCF] = React.useState("password")
 
     const handleSubmit = () => {
         setLoadingState(true)
@@ -87,6 +91,28 @@ const SignUp = (props) => {
         setIsDisabled(!signUpFormValidation(signUpData))
     }
 
+    const handlePWClick = (event) => {
+        event.preventDefault()
+        if(event.target.attributes.name.value === "Show"){
+            setShowPasswordBtn("Hide")
+            setShowPassword("text")
+        } else {
+            setShowPasswordBtn("Show")
+            setShowPassword("password")
+        }
+    }
+
+    const handlePWCClick = (event) => {
+        event.preventDefault()
+        if(event.target.attributes.name.value === "Show"){
+            setShowPasswordCFBtn("Hide")
+            setShowPasswordCF("text")
+        } else {
+            setShowPasswordCFBtn("Show")
+            setShowPasswordCF("password")
+        }
+    }
+
     return(
         <Grid.Column style={{ maxWidth: 1000 }}>
             <Dimmer active={loadingState}>
@@ -123,18 +149,22 @@ const SignUp = (props) => {
                             onChange={(event) => {setNickName(event.target.value); validation(event)}}
                         />
                     </Form.Group>
-                    <Form.Input
-                        fluid
-                        required
-                        label="Password"
-                        name="password"
-                        icon='lock'
-                        iconPosition='left'
-                        placeholder='Password'
-                        type='password'
-                        onFocus={handleFocus}
-                        onChange={(event) => {setPassword(event.target.value); validation(event)}}
-                    />
+                    <Form.Group>
+                        <Form.Input
+                            fluid
+                            required
+                            label="Password"
+                            name="password"
+                            icon='lock'
+                            iconPosition='left'
+                            placeholder='Password'
+                            type={showPassword}
+                            width={16}
+                            onFocus={handleFocus}
+                            onChange={(event) => {setPassword(event.target.value); validation(event)}}
+                        />
+                        <Form.Button inverted className="show" label="show" onClick={handlePWClick} name={showPasswordBtn} > {showPasswordBtn} </Form.Button>
+                    </Form.Group>
                     <Segment textAlign='left' className={showHide} >
                         <Header inverted as='h5'color={eightCharacter}>The password should be at least 8 characters</Header>
                         <Header inverted as='h5'color={upperCase}>The password should contains at least 1 upper case character</Header>
@@ -142,6 +172,7 @@ const SignUp = (props) => {
                         <Header inverted as='h5'color={number}>The password should contains at least 1 number</Header>
                         <Header inverted as='h5'color={specialChar}>The password should contains at least 1 *@!#%&()^~</Header>
                     </Segment>
+                    <Form.Group>
                     <Form.Input
                         fluid
                         required
@@ -150,10 +181,13 @@ const SignUp = (props) => {
                         icon='lock'
                         iconPosition='left'
                         placeholder='Confirm Password' 
-                        type='password'
+                        type={showPasswordCF}
+                        width={16}
                         error={confirmPasswordError}
                         onChange={(event) => {setPasswordConfirmation(event.target.value); validation(event)}}
                     />
+                        <Form.Button inverted className="show" label="show" onClick={handlePWCClick} name={showPasswordCFBtn} > {showPasswordCFBtn} </Form.Button>
+                    </Form.Group>
                     <Button inverted disabled={isDisabled} fluid size='large'>
                         Sign Up
                     </Button>

@@ -1,3 +1,15 @@
 label {
     text-align: left;
 }
+
+.show {
+    padding-left: 0px !important
+}
+
+.show label {
+    visibility: hidden;
+}
+
+.hide {
+    display: none;
+}
