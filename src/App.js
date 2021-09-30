@@ -12,6 +12,7 @@ function App() {
         <Route exact path="/login"      component={index.SignUPLoginPage} />
         <Route exact path="/signup"     component={index.SignUPLoginPage} />
         <Route exact path="/profile"    component={index.ProfilePage} />
+        <Route exact path="/search"    component={index.SearchPage} />
         <Route exact path="/"           component={index.FrontPage} />
       </Switch>
     </div>

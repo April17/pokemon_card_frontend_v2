@@ -31,8 +31,10 @@ const SignUp = (props) => {
     const [isDisabled, setIsDisabled] = React.useState(true)
     const [showPasswordBtn, setShowPasswordBtn] = React.useState("Show")
     const [showPassword, setShowPassword] = React.useState("password")
+    const [showHideBtn, setShowHideBtn] = React.useState("hide")
     const [showPasswordCFBtn, setShowPasswordCFBtn] = React.useState("Show")
     const [showPasswordCF, setShowPasswordCF] = React.useState("password")
+    const [showHideCFBtn, setShowHideCFBtn] = React.useState("hide")
 
     const handleSubmit = () => {
         setLoadingState(true)
@@ -102,6 +104,12 @@ const SignUp = (props) => {
         }
     }
 
+    const hideBtn = () => {
+        if(password.length === 0){
+            setShowHideBtn("hide")
+        }
+    }
+
     const handlePWCClick = (event) => {
         event.preventDefault()
         if(event.target.attributes.name.value === "Show"){
@@ -110,6 +118,12 @@ const SignUp = (props) => {
         } else {
             setShowPasswordCFBtn("Show")
             setShowPasswordCF("password")
+        }
+    }
+
+    const hideCFBtn = () => {
+        if(passwordConfirmation.length === 0){
+            setShowHideCFBtn("hide")
         }
     }
 
@@ -161,9 +175,10 @@ const SignUp = (props) => {
                             type={showPassword}
                             width={16}
                             onFocus={handleFocus}
-                            onChange={(event) => {setPassword(event.target.value); validation(event)}}
+                            onChange={(event) => {setPassword(event.target.value); validation(event); setShowHideBtn("show")}}
+                            onBlur={hideBtn}
                         />
-                        <Form.Button inverted className="show" label="show" onClick={handlePWClick} name={showPasswordBtn} > {showPasswordBtn} </Form.Button>
+                        <Form.Button inverted className={showHideBtn} label="show" onClick={handlePWClick} name={showPasswordBtn} > {showPasswordBtn} </Form.Button>
                     </Form.Group>
                     <Segment textAlign='left' className={showHide} >
                         <Header inverted as='h5'color={eightCharacter}>The password should be at least 8 characters</Header>
@@ -184,9 +199,10 @@ const SignUp = (props) => {
                         type={showPasswordCF}
                         width={16}
                         error={confirmPasswordError}
-                        onChange={(event) => {setPasswordConfirmation(event.target.value); validation(event)}}
+                        onChange={(event) => {setPasswordConfirmation(event.target.value); validation(event); setShowHideCFBtn("show")}}
+                        onBlur={hideCFBtn}
                     />
-                        <Form.Button inverted className="show" label="show" onClick={handlePWCClick} name={showPasswordCFBtn} > {showPasswordCFBtn} </Form.Button>
+                        <Form.Button inverted className={showHideCFBtn} label="show" onClick={handlePWCClick} name={showPasswordCFBtn} > {showPasswordCFBtn} </Form.Button>
                     </Form.Group>
                     <Button inverted disabled={isDisabled} fluid size='large'>
                         Sign Up

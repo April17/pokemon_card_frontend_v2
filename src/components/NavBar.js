@@ -32,15 +32,23 @@ const NavBar = (props) => {
         }
     }
 
+    const pushToSearch = () => {
+        props.history.push('/search')
+    }
+
     return (
-        <Menu inverted className="navbar" size='small'>
+        <Menu inverted className="navbar" size='small' borderless>
             <Menu.Item >
                 <Image src={logo} onClick={handleClick} name="" size='mini' />
             </Menu.Item>
             <Menu.Item active={false}>
                 <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
-            </Menu.Item> 
+            </Menu.Item>
+ 
             <Menu.Menu position='right'>
+                <Menu.Item>
+                    <Button onClick={pushToSearch} icon='search' inverted circular/>
+                </Menu.Item>
                 {
                     localStorage.token? 
                     (

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Header, Segment, Message, Dimmer, Icon, Grid } from 'semantic-ui-react'
+import { Button, Form, Header, Segment, Message, Dimmer, Icon } from 'semantic-ui-react'
 import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { logIn } from '../redux/adapters/currentUserAdapters'
@@ -13,6 +13,7 @@ const Login = (props) => {
     const [rememberMe, setRememberMe] = React.useState(false)
     const [showPasswordBtn, setShowPasswordBtn] = React.useState("Show")
     const [showPassword, setShowPassword] = React.useState("password")
+    const [showHideBtn, setShowHideBtn] = React.useState("hide")
 
     React.useEffect(() => {
         if(localStorage.rememberMe === "false" || !localStorage.rememberMe){
@@ -74,6 +75,12 @@ const Login = (props) => {
         }
     }
 
+    const hideBtn = () => {
+        if(password.length === 0){
+            setShowHideBtn("hide")
+        }
+    }
+
     return(
         <div>
             <Dimmer active={loadingState}>
@@ -106,9 +113,10 @@ const Login = (props) => {
                             type={showPassword}
                             width={16}
                             value={password}
-                            onChange={(event) => {setPassword(event.target.value); buttonState();}}
+                            onChange={(event) => {setPassword(event.target.value); buttonState(); setShowHideBtn("show")}}
+                            onBlur={hideBtn}
                         />
-                        <Form.Button inverted className="show" label="show" onClick={handleClick} name={showPasswordBtn} > {showPasswordBtn} </Form.Button>
+                        <Form.Button inverted className={showHideBtn} label="show" onClick={handleClick} name={showPasswordBtn} > {showPasswordBtn} </Form.Button>
                     </Form.Group>
                     <Form.Checkbox id="remember_me" label='Remember me' checked={rememberMe} onChange={ (event) => checkBoxState(event)} />
                     <Button inverted fluid disabled={isDisabled} size='large'>
