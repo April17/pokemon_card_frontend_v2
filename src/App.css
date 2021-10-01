@@ -55,3 +55,8 @@
 .no-padding {
   padding: 0px !important;
 }
+
+.page {
+  max-width: 1440px;
+  margin: auto;
+}

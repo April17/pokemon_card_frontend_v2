@@ -1,0 +1,21 @@
+#result-bar {
+    top: 65px;
+    margin-bottom: 10px;
+}
+
+.secondary-items {
+    margin-left: 0.5vw !important;
+}
+
+.column {
+    padding-left: 0px !important;
+}
+
+.search-dropdown {
+    background-color: whitesmoke !important;
+    color: black !important;
+}
+
+.card-margin-bottom {
+    margin-bottom: 5px !important;
+}

@@ -6,6 +6,7 @@ import { logInFromState } from '../redux/adapters/utilityAdapters'
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
 import Cart from './Cart'
+import Search from './Search'
 
 
 
@@ -32,23 +33,30 @@ const NavBar = (props) => {
         }
     }
 
-    const pushToSearch = () => {
-        props.history.push('/search')
-    }
-
     return (
         <Menu inverted className="navbar" size='small' borderless>
-            <Menu.Item >
-                <Image src={logo} onClick={handleClick} name="" size='mini' />
-            </Menu.Item>
-            <Menu.Item active={false}>
-                <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
-            </Menu.Item>
- 
-            <Menu.Menu position='right'>
-                <Menu.Item>
-                    <Button onClick={pushToSearch} icon='search' inverted circular/>
+            <Menu.Menu position='left'>
+                <Menu.Item >
+                    <Image src={logo} onClick={handleClick} name="" size='mini' />
                 </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
+                </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h1' ></Header>
+                </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h3'> Shop </Header>
+                </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h1' ></Header>
+                </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h1' ></Header>
+                </Menu.Item>
+            </Menu.Menu>
+                <Search/>
+            <Menu.Menu position='right'>
                 {
                     localStorage.token? 
                     (

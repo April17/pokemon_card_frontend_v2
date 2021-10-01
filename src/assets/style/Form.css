@@ -3,7 +3,8 @@ label {
 }
 
 .show {
-    padding-left: 0px !important
+    padding-left: 0px !important;
+    display: block;
 }
 
 .show label {

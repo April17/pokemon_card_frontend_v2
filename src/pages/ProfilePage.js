@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Header, Grid, Segment } from 'semantic-ui-react'
 
@@ -37,7 +38,7 @@ const mapDispatchToProps = {
     
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(ProfilePage);
+)(ProfilePage));

@@ -25,7 +25,6 @@ const Frontpage = (props) => {
         <div className='page'>
             <Grid textAlign='center' style={{ height: '100vh' }} >
                 <Grid.Row className="first-row">
-                    
                     <Grid.Column  width={10}>
                         <Segment className="frostglass" textAlign='center' >
                             <Image className="banner-height" src={BannerLarge} spaced='right'/>
