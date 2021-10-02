@@ -35,7 +35,7 @@ const Search = (props) => {
 
     const handleSearch = () => {
         // queryMaker(props.searchData)
-        props.search(queryMaker(props.searchData))
+        props.search(queryMaker(props.searchData),1)
         props.history.push('/search')
         
     }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Button, Menu, Header, Dropdown, Image } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
@@ -37,16 +37,16 @@ const NavBar = (props) => {
         <Menu inverted className="navbar" size='small' borderless>
             <Menu.Menu position='left'>
                 <Menu.Item >
-                    <Image src={logo} onClick={handleClick} name="" size='mini' />
+                    <Link to="/" className="link-color"><Image src={logo} name="" size='mini' /></Link>
                 </Menu.Item>
                 <Menu.Item active={false}>
-                    <Header inverted as='h1' onClick={handleClick} name="">Pokéball</Header>
+                    <Header inverted as='h1' name=""><Link to="/" className="link-color">Pokéball</Link></Header>
                 </Menu.Item>
                 <Menu.Item active={false}>
                     <Header inverted as='h1' ></Header>
                 </Menu.Item>
                 <Menu.Item active={false}>
-                    <Header inverted as='h3'> Shop </Header>
+                    <Header inverted as='h3'><Link to="/search" className="link-color"> Shop </Link></Header>
                 </Menu.Item>
                 <Menu.Item active={false}>
                     <Header inverted as='h1' ></Header>

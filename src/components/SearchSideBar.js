@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Header, Grid, Segment, Form, Dropdown } from 'semantic-ui-react'
+import { Header, Grid, Segment, Form, Dropdown, Button, Icon, Label } from 'semantic-ui-react'
+import { typesAdapter, subtypeAdapter, supertypeAdapter, rarityAdapter, search } from '../redux/adapters/searchAdapters'
+import { queryMaker } from '../utility/utility'
 
 const typeData = ["Colorless",
                 "Darkness",
@@ -14,6 +16,7 @@ const typeData = ["Colorless",
                 "Psychic",
                 "Water"]
 const subtypesData = [
+    { key: 'Select', text: 'Select', value: 'Select' },
     { key: 'BREAK', text: 'BREAK', value: 'BREAK' },
     { key: 'Baby', text: 'Baby', value: 'Baby' },
     { key: 'Basic', text: 'Basic', value: 'Basic' },
@@ -44,6 +47,7 @@ const supertypesData = ["Energy",
                     "Pokémon",
                     "Trainer"]
 const raritiesData =[
+    { key: 'Select', text: 'Select', value: 'Select' },
     { key: 'Amazing Rare', text: 'Amazing Rare', value: 'Amazing Rare' },
     { key: 'LEGEND', text: 'LEGEND', value: 'LEGEND' },
     { key: 'Promo', text: 'Promo', value: 'Promo' },
@@ -69,9 +73,10 @@ const raritiesData =[
     { key: 'Common', text: 'Common', value: 'Common' }
 ]
 
+let types = ['All']
 
-let types = []
 const SearchSideBar = (props) => {
+    
 
     const handleTypes = (event) => {
         if(event.target.checked){
@@ -79,6 +84,32 @@ const SearchSideBar = (props) => {
         } else {
             types.splice(types.findIndex(type => type === event.target.value),1)
         }
+        console.log(types)
+        if(types.length === 0){
+            types.push('All')
+        } else if(types.includes('All')) {
+            types.splice(types.findIndex(type => type === 'All'),1)
+        }
+        console.log(types)
+        props.typesAdapter(types)
+    }
+
+    const handleSubtypes = (event) => {
+        props.subtypeAdapter(event.currentTarget.childNodes[0].innerText)
+    }
+
+    const handleSupertypes = (event) => {
+        props.supertypeAdapter(event.target.value)
+    }
+
+    const handleRarities = (event) => {
+        props.rarityAdapter(event.currentTarget.childNodes[0].innerText)
+    }
+
+    const handleSearch = () => {
+        // queryMaker(props.searchData)
+        props.search(queryMaker(props.searchData),1)
+        
     }
 
     const genTypes = () => {
@@ -87,42 +118,45 @@ const SearchSideBar = (props) => {
             ) 
     }
 
-    const handleSubtypes = (event) => {
-        console.log(event.currentTarget.childNodes[0].innerText)
-    }
-
-    const handleSupertypes = (event) => {
-        console.log(event.target.value)
-    }
-
     const genSupertypes = () => {
         return supertypesData.map(supertype => 
             <Form.Field key={supertype} name="supertype" value={supertype} label={supertype} control='input' type='radio' />
             ) 
     }
-
-    const handleRarities = (event) => {
-        console.log(event.currentTarget.childNodes[0].innerText)
-    }
     
 
     return(
         <Grid textAlign='left' style={{ height: '90vh' }}>
-            <Grid.Column style={{ maxWidth: 450 }}>
+            <Grid.Column >
+                {/* <Segment className="transparent" >
+                    <Button inverted color='green' onClick={handleSearch}>
+                        Update Search
+                    </Button>
+                </Segment> */}
                 <Segment className="transparent" >
-                    <Header inverted>Types</Header>
+                    <Grid>
+                        <Header inverted>Types</Header>
+                        <Icon inverted name='refresh'onClick={handleSearch} link/>
+                    </Grid>
                     <Form className="secondary-items" inverted onChange={handleTypes}>
                         <Form.Group grouped >
                             {genTypes()}
                         </Form.Group>
+                        
                     </Form>
                 </Segment>
                 <Segment className="transparent" >
-                    <Header inverted>Subtype</Header>
-                    <Dropdown className="secondary-items search-dropdown" defaultValue='BREAK' options={subtypesData} onChange={handleSubtypes} scrolling button/>
+                    <Grid>
+                        <Header inverted>Subtype</Header>
+                        <Icon inverted name='refresh' onClick={handleSearch} link/>
+                    </Grid>
+                    <Dropdown className="secondary-items search-dropdown" defaultValue='Select' options={subtypesData} onChange={handleSubtypes} scrolling button/>
                 </Segment> 
                 <Segment className="transparent" >
-                    <Header inverted>Supertype</Header>
+                    <Grid>
+                        <Header inverted>Supertype</Header>
+                        <Icon inverted name='refresh' onClick={handleSearch} link/>
+                    </Grid>
                     <Form className="secondary-items" inverted onChange={handleSupertypes}>
                         <Form.Group grouped>
                             {genSupertypes()}
@@ -130,8 +164,11 @@ const SearchSideBar = (props) => {
                     </Form>
                 </Segment> 
                 <Segment className="transparent" >
-                    <Header inverted>Rarity</Header>
-                    <Dropdown className="secondary-items search-dropdown" defaultValue='Amazing Rare' options={raritiesData} onChange={handleRarities} scrolling button/>
+                    <Grid>
+                        <Header inverted>Rarity</Header>
+                        <Icon inverted name='refresh' onClick={handleSearch} link/>
+                    </Grid>
+                    <Dropdown className="secondary-items search-dropdown" defaultValue='Select' options={raritiesData} onChange={handleRarities} scrolling button/>
                 </Segment>     
             </Grid.Column>
         </Grid>
@@ -142,12 +179,16 @@ const SearchSideBar = (props) => {
 
 const mapStateToProps = state => {
     return {
-      
+        searchData: state.searchReducers
     }
 }
 
 const mapDispatchToProps = {
-    
+    typesAdapter,
+    subtypeAdapter, 
+    supertypeAdapter, 
+    rarityAdapter,
+    search
 }
 
 export default connect(

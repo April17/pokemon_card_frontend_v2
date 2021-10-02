@@ -27,7 +27,7 @@ const Card = (props) => {
             )
         } else {
             return (
-                <div>
+                <div style={{"height":"46px"}}>
                     <Header inverted as='h3' textAlign='center'>{name}</Header>
                 </div>
             )

@@ -34,7 +34,7 @@ const CartCard = (props) => {
             <Card.Content>
                 <Grid columns={2}>
                     <Grid.Column width={7}>
-                        <Image floated='left' fluid src={itemData.images.small}/>
+                        <Image className='cart-card-padding'  src={itemData.images.small}/>
                     </Grid.Column>
                     <Grid.Column width={9} >
                         <Grid.Row>

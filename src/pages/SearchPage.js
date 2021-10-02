@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { Header, Grid, Segment } from 'semantic-ui-react'
 import SearchSideBar from '../components/SearchSideBar'
 import Items from '../components/Items'
+import Result from '../components/Result'
 import '../assets/style/SearchPage.css'
 
 
@@ -20,7 +21,7 @@ const SearchPage = (props) => {
                 <Grid.Row id="result-bar" columns={1}>
                     <Grid.Column  width={16}>
                         <Segment className="frostglass" textAlign='left' >
-                            <Header inverted>Result</Header>
+                            <Result/>
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>

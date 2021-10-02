@@ -5,6 +5,7 @@
 
 .secondary-items {
     margin-left: 0.5vw !important;
+    margin-top: 10px!important;
 }
 
 .column {
@@ -18,4 +19,21 @@
 
 .card-margin-bottom {
     margin-bottom: 5px !important;
+}
+
+.pager-text-color a {
+    color: white !important;
+    font-size: 15px;
+}
+
+a.item:hover {
+    color: rgb(77, 77, 77) !important;
+}
+
+.active.item {
+    background-color: rgb(115, 115, 115) !important;
+}
+
+.no-botton-padding {
+    padding-bottom: 0px !important;
 }

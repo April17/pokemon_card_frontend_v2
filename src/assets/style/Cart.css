@@ -21,3 +21,7 @@
 .qty-size {
     width: 3%;
 }
+
+.cart-card-padding{
+    padding-left: 5px !important;
+}

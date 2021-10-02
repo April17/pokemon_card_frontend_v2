@@ -1,5 +1,5 @@
 const defaultState = {
-    name:"",
+    name:"Jirachi",
     types:['All'],
     subtype:"",
     supertype:"",

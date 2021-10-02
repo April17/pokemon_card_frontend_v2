@@ -17,6 +17,8 @@ const Cart = (props) => {
     React.useEffect(() => {
       if(localStorage.token){
         props.getCart()
+      } else if (localStorage.cart){
+        props.editCart(JSON.parse(localStorage.cart))
       }
     }, [])
 
@@ -59,7 +61,7 @@ const Cart = (props) => {
                     <Card.Content>
                         <Grid columns={2}>
                             <Grid.Column width={7}>
-                                <Image floated='left' fluid src={CardBack}/>
+                                <Image className='cart-card-padding' fluid src={CardBack} />
                             </Grid.Column>
                             <Grid.Column width={9} >
                                 <Grid.Row>

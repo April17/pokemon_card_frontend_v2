@@ -2,7 +2,8 @@ import { POKEMON_API_ROOT, API_KEY } from '../../assets/API_Route';
 import { actions } from "../actions/searchActions"
 
 
-export const search = (query) => dispatch => {
+export const search = (query, page) => dispatch => {
+    console.log(`${POKEMON_API_ROOT}/cards?q=${query}&pageSize=9&page=${page}`)
     const config = {
         method: 'GET',
         headers: {
@@ -11,7 +12,7 @@ export const search = (query) => dispatch => {
             'X-Api-Key': API_KEY
           }
     }
-    fetch(`${POKEMON_API_ROOT}/cards?q=${query}&pageSize=12`, config)
+    fetch(`${POKEMON_API_ROOT}/cards?q=${query}&pageSize=9&page=${page}`, config)
         .then(rsp => rsp.json())
         .then(data => {
             dispatch(actions.resultAction(data))
