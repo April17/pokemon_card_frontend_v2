@@ -68,3 +68,9 @@
 .link-color:hover {
   color: white;
 }
+
+.first-row {
+  top: 65px; 
+  height: 501px;
+  margin-bottom: 125px;
+}

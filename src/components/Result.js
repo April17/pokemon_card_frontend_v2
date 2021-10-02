@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
-import { Header, Grid, Segment } from 'semantic-ui-react'
+import { Header } from 'semantic-ui-react'
 
 
 
@@ -18,8 +18,6 @@ const Result = (props) => {
         if(upperRange > resultData.totalCount){
             upperRange = resultData.totalCount
         }
-        console.log("lowerRange: ", lowerRange)
-        console.log("upperRange: ", upperRange)
         return `${[lowerRange, upperRange].join(" - ")} of ${resultData.totalCount} results`
     }
 
@@ -33,7 +31,7 @@ const Result = (props) => {
         }
     }
     
-    console.log(props.searchData.result)
+    // console.log(props.searchData.result)
     return(
         <Header as='h4' inverted>{resultCondition()}</Header>  
     )

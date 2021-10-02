@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Header, Grid, Segment, Form, Dropdown, Button, Icon, Label } from 'semantic-ui-react'
+import { Header, Grid, Segment, Form, Dropdown, Icon } from 'semantic-ui-react'
 import { typesAdapter, subtypeAdapter, supertypeAdapter, rarityAdapter, search } from '../redux/adapters/searchAdapters'
 import { queryMaker } from '../utility/utility'
 
@@ -84,13 +84,11 @@ const SearchSideBar = (props) => {
         } else {
             types.splice(types.findIndex(type => type === event.target.value),1)
         }
-        console.log(types)
         if(types.length === 0){
             types.push('All')
         } else if(types.includes('All')) {
             types.splice(types.findIndex(type => type === 'All'),1)
         }
-        console.log(types)
         props.typesAdapter(types)
     }
 

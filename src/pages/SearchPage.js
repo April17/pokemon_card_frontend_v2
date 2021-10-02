@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
-import { Header, Grid, Segment } from 'semantic-ui-react'
+import { Grid, Segment } from 'semantic-ui-react'
 import SearchSideBar from '../components/SearchSideBar'
 import Items from '../components/Items'
 import Result from '../components/Result'

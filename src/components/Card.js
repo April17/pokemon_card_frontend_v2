@@ -1,4 +1,5 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Image, Header, Button, Grid } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
@@ -16,25 +17,28 @@ const Card = (props) => {
         if(name.length <= 16){
             return (
                 <div style={{"height":"46px"}}>
-                    <Header inverted as='h3' textAlign='center'>{name}</Header>
+                    <Header inverted as='h3' textAlign='center' onClick={toDetailPage} >{name}</Header>
                 </div>
             )
         } else if (name.length >= 24){
             return (
                 <div style={{"height":"46px"}}>
-                    <Header inverted as='h3' textAlign='center'>{name.substring(0,20)+"..."}</Header>
+                    <Header inverted as='h3' textAlign='center' onClick={toDetailPage} >{name.substring(0,20)+"..."}</Header>
                 </div>
             )
         } else {
             return (
                 <div style={{"height":"46px"}}>
-                    <Header inverted as='h3' textAlign='center'>{name}</Header>
+                    <Header inverted as='h3' textAlign='center' onClick={toDetailPage} >{name}</Header>
                 </div>
             )
         }
     }
 
-    const handleClick = () => {
+    const handleClick = (event) => {
+        if(event.target.name === "addtocart"){
+            console.log("addtocart")
+        }
         let cartData = [...props.cartItems]
         const itemIndex = props.cartItems.findIndex(item => item.id === data.id)
         if (itemIndex === -1){
@@ -55,12 +59,18 @@ const Card = (props) => {
         }
     }
 
+    const toDetailPage = (event) => {
+        console.log("toDetailPage")
+        console.log(event.target)
+        props.history.push(`/card/${props.cardData.id}`, data)
+    }
     
+    // console.log(props.history)
     return(
         <div className="ui link cards center">
             <div className="card transparent">
                 <div className="image">
-                    <Image src={data.images.large} size='small' centered />
+                    <Image src={data.images.large} size='small' centered onClick={toDetailPage} />
                 </div>
                 <div className="content">
                     <div className="header">
@@ -87,7 +97,7 @@ const Card = (props) => {
                 </div>
                 <div className="extra content">
                     <span className="center floated">
-                        <Button onClick={handleClick} inverted>Add to Cart</Button>
+                        <Button onClick={handleClick} name="addtocart" inverted>Add to Cart</Button>
                     </span>
                 </div>
             </div>
@@ -107,7 +117,7 @@ const mapDispatchToProps = {
     editCart
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Card);
+)(Card));

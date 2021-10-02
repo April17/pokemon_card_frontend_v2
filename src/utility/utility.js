@@ -12,7 +12,7 @@ export const logOut = () => {
 }
 
 export const queryMaker = (searchData) => {
-    console.log(searchData)
+    // console.log(searchData)
     let query = ''
     if(searchData.name !== ''){
         query = `name:"${upcaseFirstLetter(searchData.name)}"`
@@ -34,7 +34,7 @@ export const queryMaker = (searchData) => {
     if(searchData.rarity && searchData.rarity !== "Select"){
         query = `${query} rarity:"${searchData.rarity}"`
     }
-    console.log("Query: ", query)
+    // console.log("Query: ", query)
     return query
 }
 

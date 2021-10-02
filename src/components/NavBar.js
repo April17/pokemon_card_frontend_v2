@@ -29,10 +29,10 @@ const NavBar = (props) => {
             localStorage.rememberMe = rememberMe
             localStorage.userId = userId
             localStorage.cart = cart
-            props.history.push('/')
+            props.history.push(props.history.location.pathname)
         }
     }
-
+    // console.log(props.history)
     return (
         <Menu inverted className="navbar" size='small' borderless>
             <Menu.Menu position='left'>
