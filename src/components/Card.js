@@ -82,8 +82,8 @@ const Card = (props) => {
                             <Grid.Column floated='left' textAlign='right' >
                                 <Button name="plus" icon='plus' size='tiny' onClick={handleQty} inverted circular/>
                             </Grid.Column>
-                            <Grid.Column textAlign='center' width={2}>
-                                <Header inverted className='qty' as='h4' textAlign='center' >{qty}</Header>
+                            <Grid.Column textAlign='center' verticalAlign="middle" width={2}>
+                                <Header inverted className='qty' as='h4' textAlign='center'  >{qty}</Header>
                             </Grid.Column>
                             <Grid.Column floated='right' textAlign='left' >
                                 <Button name="minus" icon='minus' size='tiny' onClick={handleQty} inverted circular/>
@@ -92,7 +92,7 @@ const Card = (props) => {
                         </Grid>
                     </div>
                     <div className="description">
-                        <Header inverted as='h4' textAlign='center'>${data.cardmarket.prices.trendPrice}</Header>
+                        <Header inverted as='h4' textAlign='center'>${(data.cardmarket.prices.trendPrice).toFixed(2)}</Header>
                     </div>
                 </div>
                 <div className="extra content">

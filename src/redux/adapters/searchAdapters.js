@@ -3,7 +3,7 @@ import { actions } from "../actions/searchActions"
 
 
 export const search = (query, page) => dispatch => {
-    console.log(`${POKEMON_API_ROOT}/cards?q=${query}&pageSize=9&page=${page}`)
+    // console.log(`${POKEMON_API_ROOT}/cards?q=${query}&pageSize=9&page=${page}`)
     const config = {
         method: 'GET',
         headers: {

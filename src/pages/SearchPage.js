@@ -25,7 +25,7 @@ const SearchPage = (props) => {
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>
-                <Grid.Row className="second-row" columns={2} stretched>
+                <Grid.Row columns={2} stretched>
                     <Grid.Column  width={4}>
                         <Segment className="frostglass" textAlign='left'>
                             <SearchSideBar/>
