@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Header, Grid, Segment, Image, Button, Dimmer, Icon, Pagination } from 'semantic-ui-react'
-import { search } from '../redux/adapters/searchAdapters'
+import { search, nameAdapter } from '../redux/adapters/searchAdapters'
 import { queryMaker } from '../utility/utility'
 import CardBack from '../assets/Image/pokemon_card_backside.png'
 import Card from './Card'
@@ -13,8 +13,15 @@ const Items = (props) => {
     const itemsData = props.searchData.result.data
 
     React.useEffect(() => {
-        if (!itemsData) {
-            props.search(queryMaker(props.searchData),1)
+        if (!props.searchData.name) {
+            props.nameAdapter("Jirachi")
+            props.search(queryMaker({  
+                name:"Jirachi",
+                types:['All'],
+                subtype:"",
+                supertype:"",
+                rarity:"",
+                result:{}}),1)
         }
     }, [])
 
@@ -83,7 +90,7 @@ const Items = (props) => {
             )
         }
     }
-
+    
     const pagerCondition = () => {
         if(itemsData){
             if(itemsData.length >= 1){
@@ -113,7 +120,7 @@ const Items = (props) => {
         }
     }
 
-    // console.log("Search Props: ", props.searchData.result)
+    // console.log("itemData: ", itemsData)
     return(
         <Grid textAlign='left' style={{ height: '100vh' }} >
             <Grid.Row columns={3} textAlign='left'>
@@ -137,7 +144,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    search
+    search,
+    nameAdapter
 }
 
 export default withRouter(connect(

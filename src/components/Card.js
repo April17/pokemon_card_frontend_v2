@@ -10,8 +10,9 @@ import { editCart } from '../redux/adapters/cartAdapters'
 const Card = (props) => {
 
     let [qty, setQty] = React.useState(1)
-
     const data = {...props.cardData, qty: 0}
+    let price = 0
+    
 
     const nameFormat = (name) => {   
         if(name.length <= 16){
@@ -35,10 +36,7 @@ const Card = (props) => {
         }
     }
 
-    const handleClick = (event) => {
-        if(event.target.name === "addtocart"){
-            console.log("addtocart")
-        }
+    const handleClick = () => {
         let cartData = [...props.cartItems]
         const itemIndex = props.cartItems.findIndex(item => item.id === data.id)
         if (itemIndex === -1){
@@ -59,13 +57,22 @@ const Card = (props) => {
         }
     }
 
-    const toDetailPage = (event) => {
-        console.log("toDetailPage")
-        console.log(event.target)
+    const toDetailPage = () => {
         props.history.push(`/card/${props.cardData.id}`, data)
     }
+
+    const priceChecker = () => {
+        if(data.tcgplayer){
+            price = data.tcgplayer.prices[Object.keys(data.tcgplayer.prices)[0]].low
+        } else if (data.cardmarket) {
+            price = data.cardmarket.prices.lowPrice * 1.35
+        }
+        if(!price){
+            price = 0
+        }
+        return price
+    }
     
-    // console.log(props.history)
     return(
         <div className="ui link cards center">
             <div className="card transparent">
@@ -92,7 +99,7 @@ const Card = (props) => {
                         </Grid>
                     </div>
                     <div className="description">
-                        <Header inverted as='h4' textAlign='center'>${(data.cardmarket.prices.trendPrice).toFixed(2)}</Header>
+                        <Header inverted as='h4' textAlign='center'>${priceChecker().toFixed(2)}</Header>
                     </div>
                 </div>
                 <div className="extra content">

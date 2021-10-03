@@ -11,15 +11,10 @@ import { editCart } from '../redux/adapters/cartAdapters'
 const CardDetailPage = (props) => {
 
     const cardData = props.history.location.state
-    const data = {...cardData}
     let [qty, setQty] = React.useState(1)
-
-    React.useEffect(() => {
-
-    }, [])
+    let price = 0
 
     const genAttacks = () => {
-        console.log(cardData.attacks)
         const attacks = cardData.attacks
         return attacks.map((attack, index) =>             
         <Message className="transparent attack-message" key={attack.name+index}>
@@ -30,7 +25,27 @@ const CardDetailPage = (props) => {
                 {attack.text? <Message.Item>Description: {attack.text}</Message.Item> : null}
             </Message.List>
         </Message>
+        )
+    }
 
+    const genAbilities = () => {
+        const abilities = cardData.abilities
+        return abilities.map((ability, index) =>             
+        <Message className="transparent attack-message" key={ability.name+index}>
+            <Message.Header>{ability.name}</Message.Header>
+            <Message.List>
+                {ability.text? <Message.Item>Description: {ability.text}</Message.Item> : null}
+            </Message.List>
+        </Message>
+        )
+    }
+
+    const genRules = () => {
+        const rules = cardData.rules
+        return rules.map((rule, index) =>
+        <Message className="transparent attack-message" key={cardData.id+index}>
+            {rule}
+        </Message>
         )
     }
 
@@ -42,12 +57,12 @@ const CardDetailPage = (props) => {
         }
     }
 
-    const handleClick = (event) => {
+    const handleClick = () => {
         let cartData = [...props.cartItems]
-        const itemIndex = props.cartItems.findIndex(item => item.id === data.id)
+        const itemIndex = props.cartItems.findIndex(item => item.id === cardData.id)
         if (itemIndex === -1){
-            data.qty = qty
-            cartData.push(data)
+            cardData.qty = qty
+            cartData.push(cardData)
         } else {
             cartData[itemIndex].qty += qty
         }
@@ -55,6 +70,67 @@ const CardDetailPage = (props) => {
         props.editCart(cartData)
     }
 
+    const supertypeSwitch = () => {
+        if(cardData.supertype === "Pokémon"){
+            return pokemonDetail()
+        } else if (cardData.supertype === "Energy"){
+            return energyDetail()
+        } else if (cardData.supertype === "Trainer"){
+            return trainerDetail()
+        }
+    }
+
+    const pokemonDetail = () => {
+        return (
+            <Segment className="frostglass" textAlign='left' >
+                <Header as="h4" inverted>{`Card Number / Rarity: ${cardData.number} / ${cardData.rarity}`}</Header>
+                <Header as="h4" inverted>{`Card Types / HP / subtypes: ${cardData.types.join(" ")} / ${cardData.hp} / ${cardData.subtypes.join(" ")}`}</Header>
+                {cardData.abilities?                 
+                    <Header as="h4" inverted>
+                        Abilities: {genAbilities()}
+                    </Header> : null}
+                <Header as="h4" inverted>
+                    Attacks: {genAttacks()}
+                </Header>
+            </Segment>
+        )
+    }
+
+    const energyDetail = () => {
+        return (
+            <Segment className="frostglass" textAlign='left' >
+                <Header as="h4" inverted>{`Card Number / Rarity: ${cardData.number} / ${cardData.rarity}`}</Header>
+                <Header as="h4" inverted>{`Card supertype / subtypes: ${cardData.supertype} / ${cardData.subtypes.join(" ")}`}</Header>
+                <Header as="h4" inverted>
+                    Rules: {genRules()}
+                </Header>
+            </Segment>
+            )
+    }
+
+    const trainerDetail = () => {
+        return (
+            <Segment className="frostglass" textAlign='left' >
+                <Header as="h4" inverted>{`Card Number / Rarity: ${cardData.number} / ${cardData.rarity}`}</Header>
+                <Header as="h4" inverted>{`Card supertype: ${cardData.supertype}`}</Header>
+                <Header as="h4" inverted>
+                    Rules: {genRules()}
+                </Header>
+            </Segment>
+            )
+    }
+
+    const priceChecker = () => {
+        if(cardData.tcgplayer){
+            price = cardData.tcgplayer.prices[Object.keys(cardData.tcgplayer.prices)[0]].low
+        } else if (cardData.cardmarket) {
+            price = cardData.cardmarket.prices.lowPrice * 1.35
+        }
+        if(!price){
+            price = 0
+        }
+        return price
+    }
 
     
     console.log(cardData)
@@ -70,17 +146,15 @@ const CardDetailPage = (props) => {
                 </Grid.Row>
                 <Grid.Row className="second-row" columns={2}>
                     <Grid.Column width={6}>
-                        <Segment className="transparent">
-                            <Image src={cardData.images.large} />
-                        </Segment>
+                        <Image src={cardData.images.large} />
                     </Grid.Column>
-                    <Grid.Column width={10}>
+                    <Grid.Column className='padding-left' width={10}>
                         <Grid verticalAlign="top">
                             <Grid.Row columns={2} stretched> 
                                 <Grid.Column>
                                     <Segment className="frostglass" textAlign='center'>
                                         <Header inverted>New</Header>
-                                        <Header inverted>${(Math.round(cardData.cardmarket.prices.trendPrice * 100) / 100).toFixed(2)}</Header>
+                                        <Header inverted>${priceChecker().toFixed(2)}</Header>
                                         <Grid columns='equal' textAlign="center">
                                             <Grid.Row>
                                                 <Grid.Column floated='left' textAlign='right' >
@@ -100,26 +174,19 @@ const CardDetailPage = (props) => {
                                     </Segment>
                                 </Grid.Column>
                                 <Grid.Column stretched>
-                                    <Segment className="frostglass" textAlign="center" verticalAlign="middle">
+                                    <Segment className="frostglass" textAlign="center">
                                         <Button name="addtodecklist" inverted disabled>Add to Decklist</Button>
                                     </Segment>
-                                    <Segment className="frostglass" textAlign="center" verticalAlign="middle">
+                                    <Segment className="frostglass" textAlign="center">
                                         <Button color='green' name="addtocart" inverted>Check Out</Button>
                                     </Segment>
                                 </Grid.Column>
                             </Grid.Row>
                             <Grid.Row stretched>
                                 <Grid.Column>
-                                    <Segment className="frostglass" textAlign='left' >
-                                        <Header as="h4" inverted>{`Card Number / Rarity: ${cardData.number} / ${cardData.rarity}`}</Header>
-                                        <Header as="h4" inverted>{`Card Types / HP / subtypes: ${cardData.types.join(" ")} / ${cardData.hp} / ${cardData.hp} / ${cardData.subtypes.join(" ")}`}</Header>
-                                        <Header as="h4" inverted>
-                                            Attacks: {genAttacks()}
-                                        </Header>
-                                    </Segment>
+                                    {supertypeSwitch()}
                                 </Grid.Column>
                             </Grid.Row>
-                            
                         </Grid>
                     </Grid.Column>
                 </Grid.Row>
