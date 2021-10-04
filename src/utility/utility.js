@@ -47,3 +47,24 @@ const upcaseFirstLetter = (string) => {
     }
     return encodeURIComponent(tempStrs.join(" ").trim())
 }
+
+
+export const priceChecker = (itemData) => {
+    // console.log(itemData)
+    let price = 0
+    if(itemData.tcgplayer){
+        if(itemData.tcgplayer.prices[Object.keys(itemData.tcgplayer.prices)[0]]){
+            price = itemData.tcgplayer.prices[Object.keys(itemData.tcgplayer.prices)[0]].low
+        }
+    }
+    // console.log("price: ", price) 
+    if (itemData.cardmarket && !price) {
+        if(itemData.cardmarket.prices.trendPrice){
+            price = itemData.cardmarket.prices.trendPrice * 1.35
+        }
+    }
+    if(!price){
+        price = 0
+    }
+    return price.toFixed(2)
+}

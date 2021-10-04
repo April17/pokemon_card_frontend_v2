@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Image, Header, Button, Grid } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
+import { priceChecker } from '../utility/utility'
 
 
 
@@ -11,7 +12,6 @@ const Card = (props) => {
 
     let [qty, setQty] = React.useState(1)
     const data = {...props.cardData, qty: 0}
-    let price = 0
     
 
     const nameFormat = (name) => {   
@@ -60,18 +60,6 @@ const Card = (props) => {
     const toDetailPage = () => {
         props.history.push(`/card/${props.cardData.id}`, data)
     }
-
-    const priceChecker = () => {
-        if(data.tcgplayer){
-            price = data.tcgplayer.prices[Object.keys(data.tcgplayer.prices)[0]].low
-        } else if (data.cardmarket) {
-            price = data.cardmarket.prices.lowPrice * 1.35
-        }
-        if(!price){
-            price = 0
-        }
-        return price
-    }
     
     return(
         <div className="ui link cards center">
@@ -99,7 +87,7 @@ const Card = (props) => {
                         </Grid>
                     </div>
                     <div className="description">
-                        <Header inverted as='h4' textAlign='center'>${priceChecker().toFixed(2)}</Header>
+                        <Header inverted as='h4' textAlign='center'>${priceChecker(data)}</Header>
                     </div>
                 </div>
                 <div className="extra content">

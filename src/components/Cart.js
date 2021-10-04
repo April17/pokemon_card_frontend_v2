@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
+import { withRouter } from 'react-router-dom'
 import { Header, Dropdown, Button, Segment, Card, Grid, Image } from 'semantic-ui-react'
 import { editCart, getCart } from '../redux/adapters/cartAdapters'
 import { auth } from '../redux/adapters/currentUserAdapters'
@@ -38,7 +39,12 @@ const Cart = (props) => {
       });
       return Math.round(subTotal * 100) / 100
     }
+
+    const toCheckout = () => {
+      props.history.push('/checkout')
+    }
     
+
     return(
       <Dropdown text='Cart' className='link item' simple>
         <Dropdown.Menu id='cart'>
@@ -52,7 +58,7 @@ const Cart = (props) => {
                 </Dropdown.Header>
                 <Dropdown.Item >
                   <Segment className='transparent' textAlign='right'>
-                    <Button inverted color='green'> Proceed to Checkout </Button>
+                    <Button inverted color='green' onClick={toCheckout} > Proceed to Checkout </Button>
                   </Segment>
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -81,7 +87,7 @@ const Cart = (props) => {
                 </Dropdown.Header>
                 <Dropdown.Item >
                   <Segment className='transparent' textAlign='right'>
-                    <Button inverted color='green'> Proceed to Checkout </Button>
+                    <Button inverted color='green' onClick={toCheckout}> Proceed to Checkout </Button>
                   </Segment>
                 </Dropdown.Item>
                 <Dropdown.Divider />
@@ -110,7 +116,7 @@ const mapDispatchToProps = {
   auth
 }
 
-export default connect(
+export default withRouter(connect(
     mapStateToProps,
     mapDispatchToProps
-)(Cart);
+)(Cart));

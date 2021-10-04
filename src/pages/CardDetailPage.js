@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { Header, Grid, Segment, Image, Message, Button } from 'semantic-ui-react'
 import '../assets/style/CardDetailPage.css'
 import { editCart } from '../redux/adapters/cartAdapters'
+import { priceChecker } from '../utility/utility'
 
 
 
@@ -12,7 +13,6 @@ const CardDetailPage = (props) => {
 
     const cardData = props.history.location.state
     let [qty, setQty] = React.useState(1)
-    let price = 0
 
     const genAttacks = () => {
         const attacks = cardData.attacks
@@ -21,7 +21,8 @@ const CardDetailPage = (props) => {
             <Message.Header>{attack.name}</Message.Header>
             <Message.List>
                 <Message.Item>Cost: {attack.cost.join("/")}</Message.Item>
-                <Message.Item>Damage: {attack.damage}</Message.Item>
+                {" "}
+                <Message.Item>Damage: {attack.damage? attack.damage : 0}</Message.Item>
                 {attack.text? <Message.Item>Description: {attack.text}</Message.Item> : null}
             </Message.List>
         </Message>
@@ -80,6 +81,10 @@ const CardDetailPage = (props) => {
         }
     }
 
+    const toCheckout = () => {
+        props.history.push('/checkout')
+      }
+
     const pokemonDetail = () => {
         return (
             <Segment className="frostglass" textAlign='left' >
@@ -120,20 +125,9 @@ const CardDetailPage = (props) => {
             )
     }
 
-    const priceChecker = () => {
-        if(cardData.tcgplayer){
-            price = cardData.tcgplayer.prices[Object.keys(cardData.tcgplayer.prices)[0]].low
-        } else if (cardData.cardmarket) {
-            price = cardData.cardmarket.prices.lowPrice * 1.35
-        }
-        if(!price){
-            price = 0
-        }
-        return price
-    }
 
     
-    console.log(cardData)
+    // console.log(cardData)
     return(
         <div className="page">
             <Grid textAlign='left' columns={2} divided='vertically'>
@@ -154,7 +148,7 @@ const CardDetailPage = (props) => {
                                 <Grid.Column>
                                     <Segment className="frostglass" textAlign='center'>
                                         <Header inverted>New</Header>
-                                        <Header inverted>${priceChecker().toFixed(2)}</Header>
+                                        <Header inverted>${priceChecker(cardData)}</Header>
                                         <Grid columns='equal' textAlign="center">
                                             <Grid.Row>
                                                 <Grid.Column floated='left' textAlign='right' >
@@ -178,7 +172,7 @@ const CardDetailPage = (props) => {
                                         <Button name="addtodecklist" inverted disabled>Add to Decklist</Button>
                                     </Segment>
                                     <Segment className="frostglass" textAlign="center">
-                                        <Button color='green' name="addtocart" inverted>Check Out</Button>
+                                        <Button color='green' name="addtocart" onClick={toCheckout} inverted>Check Out</Button>
                                     </Segment>
                                 </Grid.Column>
                             </Grid.Row>

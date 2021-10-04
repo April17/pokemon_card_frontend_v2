@@ -11,3 +11,10 @@
 .padding-left {
     padding-left: 10px !important;
 }
+
+.item-description {
+    padding-top: 1px !important;
+    padding-bottom: 1px !important;
+    margin-bottom: 5px !important;
+    margin-top: 5px !important;
+}

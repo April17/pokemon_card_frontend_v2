@@ -3,6 +3,7 @@ import ProfilePage from './ProfilePage'
 import FrontPage from './FrontPage'
 import SearchPage from './SearchPage'
 import CardDetailPage from './CardDetailPage'
+import CheckoutPage from './CheckoutPage'
 
 
 
@@ -11,6 +12,7 @@ export const index = {
     ProfilePage,
     FrontPage,
     SearchPage,
-    CardDetailPage
+    CardDetailPage,
+    CheckoutPage
 }
   

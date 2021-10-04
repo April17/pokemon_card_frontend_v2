@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from "react-redux"
 import { Image, Card, Button, Header, Grid, Segment } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
+import { priceChecker } from '../utility/utility'
 
 
 const CartCard = (props) => {
@@ -28,7 +29,6 @@ const CartCard = (props) => {
         props.editCart(cartData)
     }
 
-
     return(
         <Card className='frostglass'>
             <Card.Content>
@@ -39,7 +39,7 @@ const CartCard = (props) => {
                     <Grid.Column width={9} >
                         <Grid.Row>
                             <Header as='h4' inverted> {itemData.name} </Header>
-                            <Header className='card-content' as='h5' inverted > ${itemData.cardmarket.prices.trendPrice} </Header>
+                            <Header className='card-content' as='h5' inverted > ${priceChecker(itemData)} </Header>
                         </Grid.Row>
                         <Grid.Row>
                             <Button icon='plus' name='plus' size='mini' onClick={handleQty} inverted/>
@@ -49,10 +49,8 @@ const CartCard = (props) => {
                         <Grid.Row verticalAlign='bottom' textAlign='right' >
                             <Segment className='transparent botton-right'>
                                 <Button inverted color='red' onClick={handleClick}> Remove </Button>
-                            </Segment>
-                            
+                            </Segment>                            
                         </Grid.Row>
-
                     </Grid.Column>    
                 </Grid>
             </Card.Content>

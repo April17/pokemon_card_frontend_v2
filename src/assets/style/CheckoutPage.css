@@ -1,0 +1,20 @@
+.checkout-page-first-row {
+    top: 65px;
+    margin-bottom: 12px !important;
+}
+
+.price-to-right {
+    float:right;
+}
+
+.inverted-color {
+    color: white !important;
+}
+
+.no-right-padding {
+    padding-right: 0px !important;
+}
+
+.no-right-margin {
+    margin-right: 0px !important;
+}
