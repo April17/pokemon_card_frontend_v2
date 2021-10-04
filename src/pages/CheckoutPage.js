@@ -42,7 +42,6 @@ const CheckoutPage = (props) => {
 
     const calculateTotal = () => {
         total = (Math.round((subTotal + tax) * 100) / 100).toFixed(2)
-
         return total
     }
     

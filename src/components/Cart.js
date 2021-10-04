@@ -38,7 +38,7 @@ const Cart = (props) => {
       cartItems.forEach(cartItem => {
         subTotal = subTotal + priceChecker(cartItem) * cartItem.qty
       });
-      return Math.round(subTotal * 100) / 100
+      return (Math.round(subTotal * 100) / 100).toFixed(2)
     }
 
     const toCheckout = () => {
@@ -54,7 +54,14 @@ const Cart = (props) => {
               <div>
                 <Dropdown.Header >
                   <Segment className='transparent' textAlign='left'>
-                    <Header inverted>Subtotal: ${calculateSubtotal()}</Header>
+                    <Grid columns={2}>
+                      <Grid.Column>
+                        <Header inverted>Subtotal:</Header>
+                      </Grid.Column>
+                      <Grid.Column>
+                       <Header className="price-to-right" inverted>${calculateSubtotal()}</Header>
+                      </Grid.Column>
+                    </Grid>
                   </Segment>
                 </Dropdown.Header>
                 <Dropdown.Item >

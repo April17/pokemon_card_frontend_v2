@@ -40,7 +40,7 @@ const Search = (props) => {
         
     }
     
-    console.log("Search Props: ", props.searchData)
+    // console.log("Search Props: ", props.searchData)
 
     return(
         <Menu.Item className="search">

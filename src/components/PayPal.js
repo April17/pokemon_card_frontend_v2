@@ -40,6 +40,12 @@ const PayPal = (props) => {
             },
           })
           .render(paypalRef.current);
+          return () => {
+            let element = document.getElementById("paypal-button");
+            if(element){
+                element.removeChild(element.firstChild);
+            }
+          }
       }, [props.total]);
     
       if (paid) {
@@ -52,9 +58,8 @@ const PayPal = (props) => {
       }
       
       console.log("PayPal: ", props)
-      window.paypalRef = paypalRef
       return (
-          <div ref={paypalRef} />
+          <div id="paypal-button" ref={paypalRef} />
       );
 }
 

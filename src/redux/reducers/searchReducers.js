@@ -22,7 +22,6 @@ const defaultState = {
       case 'RESULT_DATA':
         return {...state, result: action.payload}
       case 'RESET_SEARCH':
-        console.log("Hi from Reducer")
         return defaultState
       default:
         return state

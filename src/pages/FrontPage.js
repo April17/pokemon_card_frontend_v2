@@ -15,7 +15,6 @@ import '../assets/style/FrontPage.css'
 const Frontpage = (props) => {
 
     React.useEffect(() => {
-        console.log("hi")
         if(localStorage.token){
             props.getCart()
         }
