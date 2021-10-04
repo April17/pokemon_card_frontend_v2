@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import { Header, Dropdown, Button, Segment, Card, Grid, Image } from 'semantic-ui-react'
 import { editCart, getCart } from '../redux/adapters/cartAdapters'
 import { auth } from '../redux/adapters/currentUserAdapters'
+import { priceChecker } from '../utility/utility'
 import CartCard from './CartCard'
 import CardBack from '../assets/Image/pokemon_card_backside.png'
 import '../assets/style/Cart.css'
@@ -35,7 +36,7 @@ const Cart = (props) => {
     const calculateSubtotal = () => {
       let subTotal = 0
       cartItems.forEach(cartItem => {
-        subTotal = subTotal + cartItem.cardmarket.prices.trendPrice * cartItem.qty
+        subTotal = subTotal + priceChecker(cartItem) * cartItem.qty
       });
       return Math.round(subTotal * 100) / 100
     }

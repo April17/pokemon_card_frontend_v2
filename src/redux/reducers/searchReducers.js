@@ -11,16 +11,19 @@ const defaultState = {
     switch (action.type) {
       case 'NAME_DATA':
         return {...state, name: action.payload}
-    case 'TYPES_DATA':
+      case 'TYPES_DATA':
         return {...state, types: action.payload}
-    case 'SUBTYPE_DATA':
+      case 'SUBTYPE_DATA':
         return {...state, subtype: action.payload}
-    case 'SUPERTYPE_DATA':
-        return {...state, supertype: action.payload}
-    case 'RARITY_DATA':
+      case 'SUPERTYPE_DATA':
+         return {...state, supertype: action.payload}
+      case 'RARITY_DATA':
         return {...state, rarity: action.payload}
-    case 'RESULT_DATA':
+      case 'RESULT_DATA':
         return {...state, result: action.payload}
+      case 'RESET_SEARCH':
+        console.log("Hi from Reducer")
+        return defaultState
       default:
         return state
     }

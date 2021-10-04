@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Header, Segment, Item, Grid, Button } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'

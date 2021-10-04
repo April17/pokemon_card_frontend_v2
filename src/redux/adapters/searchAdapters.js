@@ -42,3 +42,7 @@ export const supertypeAdapter = (supertype) => dispatch =>{
 export const rarityAdapter = (rarity) => dispatch =>{
     dispatch(actions.rarityAction(rarity))
 }
+
+export const resetSearchAdapter = () => dispatch => {
+    dispatch(actions.resetSearchAction())
+}

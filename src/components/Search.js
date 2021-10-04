@@ -40,12 +40,12 @@ const Search = (props) => {
         
     }
     
-    // console.log("Search Props: ", props)
+    console.log("Search Props: ", props.searchData)
 
     return(
         <Menu.Item className="search">
             <Input 
-                label={<Dropdown defaultValue='All' options={options} onChange={handleDropdown} scrolling/>}
+                label={<Dropdown defaultValue={props.searchData.types[0]} options={options} onChange={handleDropdown} scrolling/>}
                 labelPosition='left'
                 icon={<Icon name='search' onClick={handleSearch} inverted circular link/>}
                 value={props.searchData.name}

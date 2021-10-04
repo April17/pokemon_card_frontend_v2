@@ -13,7 +13,7 @@ const Items = (props) => {
     const itemsData = props.searchData.result.data
 
     React.useEffect(() => {
-        if (!props.searchData.name) {
+        if (!itemsData) {
             props.nameAdapter("Jirachi")
             props.search(queryMaker({  
                 name:"Jirachi",
@@ -96,7 +96,7 @@ const Items = (props) => {
             if(itemsData.length >= 1){
                 return(
                     <Segment className="transparent no-botton-padding" textAlign='center'>
-                        <Pagination onPageChange={handlePageChange} className="frostglass pager-text-color" defaultActivePage={1} totalPages={calculateTotalPages()} />
+                        <Pagination onPageChange={handlePageChange} className="frostglass pager-text-color" defaultActivePage={props.searchData.result.page} totalPages={calculateTotalPages()} />
                     </Segment>
                 )
             } else {

@@ -5,4 +5,5 @@ export const actions = {
     supertypeAction: (supertypeData) => ({ type: "SUPERTYPE_DATA", payload: supertypeData }),
     rarityAction: (rarityData) => ({ type: "RARITY_DATA", payload: rarityData }),
     resultAction: (resultData) => ({ type: "RESULT_DATA", payload: resultData }),
+    resetSearchAction: () => ({type: "RESET_SEARCH"})
   };

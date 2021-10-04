@@ -4,6 +4,7 @@ import { Header, Image, Grid, Segment, Dimmer, Icon, Rail } from 'semantic-ui-re
 import PhotoSlider from '../components/PhotoSlider'
 import { frontPageFeaturedCard, frontPageRecommendedCard } from '../redux/adapters/frontPageAdapters'
 import { getCart } from '../redux/adapters/cartAdapters'
+import { resetSearchAdapter } from '../redux/adapters/searchAdapters'
 import BannerSmall2 from '../assets/Image/swsh07en.jpg'
 import BannerSmall3 from '../assets/Image/swsh07-card-highlights-169-en.jpg'
 import BannerLarge from '../assets/Image/swsh07-card-highlights-169-en.jpg'
@@ -14,9 +15,11 @@ import '../assets/style/FrontPage.css'
 const Frontpage = (props) => {
 
     React.useEffect(() => {
+        console.log("hi")
         if(localStorage.token){
             props.getCart()
         }
+        props.resetSearchAdapter()
         props.frontPageFeaturedCard()
         props.frontPageRecommendedCard()
     }, [])
@@ -87,7 +90,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
     frontPageFeaturedCard,
     frontPageRecommendedCard,
-    getCart
+    getCart,
+    resetSearchAdapter
 }
 
 export default connect(
