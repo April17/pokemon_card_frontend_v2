@@ -1,5 +1,5 @@
 import { actions } from "../actions/payPalActions";
 
-export const totalAdapter = (total) => dispatch => {
-    dispatch(actions.totalAction(total))
+export const shippingAdapter = (shippingData) => dispatch => {
+    dispatch(actions.shippingAction(shippingData))
 }

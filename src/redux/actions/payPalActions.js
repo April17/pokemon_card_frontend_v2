@@ -1,3 +1,3 @@
 export const actions = {
-    totalAction: (total) => ({ type: "TOTAL", payload: total }),
+    shippingAction: (shippingData) => ({type: "SHIPPING_DATA", payload: shippingData})
   };

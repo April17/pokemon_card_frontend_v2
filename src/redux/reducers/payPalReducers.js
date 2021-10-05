@@ -1,11 +1,23 @@
+
 const defaultState = {
-    total: 0
+    currency: "USD",
+    payee: {
+      firstName: "",
+      lastName: ""
+    },
+    "shipping_address": {
+      streetAddress:"",
+      apt: "",
+      city: "",
+      state: "",
+      zipCode: ""
+    }
   }
   
   export const payPalReducers = (state = defaultState, action) => {
     switch (action.type) {
-      case 'TOTAL':
-        return {...state, total: action.payload}
+      case 'SHIPPING_DATA':
+        return {...state, payee: action.payload.payee, "shipping_address": action.payload.shippingData}
       default:
         return state
     }

@@ -42,14 +42,14 @@ export const getCart = () => dispatch => {
     }
   }
   fetch(`${API_ROOT}/getcart`, config)
-  .then(rsp => rsp.json())
-  .then(data => {
-    localStorage.cart = data.response.cart
-    dispatch(actions.getCart(JSON.parse(data.response.cart)))
-  })
-  .catch(error => {
-    logOut()
-    dispatch(userActions.auth(false))
-    console.log("Error: ", error)
-  })
+    .then(rsp => rsp.json())
+    .then(data => {
+      localStorage.cart = data.response.cart
+      dispatch(actions.getCart(JSON.parse(data.response.cart)))
+    })
+    .catch(error => {
+      logOut()
+      dispatch(userActions.auth(false))
+      console.log("Error: ", error)
+    })
 }

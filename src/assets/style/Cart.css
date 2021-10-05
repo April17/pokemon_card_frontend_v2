@@ -25,3 +25,7 @@
 .cart-card-padding{
     padding-left: 5px !important;
 }
+
+.price-to-right {
+    float:right;
+}

@@ -3,6 +3,7 @@ import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
+import { checkoutAdapter } from "../redux/adapters/checkoutAdapters";
 
 
 
@@ -31,8 +32,9 @@ const PayPal = (props) => {
             },
             onApprove: async (data, actions) => {
               const order = await actions.order.capture();
+              props.checkoutAdapter(props.cartItems, props.shoppingData, order)
               setPaid(true);
-              console.log(order);
+              // console.log(order);
             },
             onError: (err) => {
               setError(err);
@@ -43,13 +45,14 @@ const PayPal = (props) => {
           return () => {
             let element = document.getElementById("paypal-button");
             if(element){
+              if(element.firstChild){
                 element.removeChild(element.firstChild);
+              }
             }
           }
       }, [props.total]);
     
       if (paid) {
-            props.editCart([])
             return <Header as="h3" inverted>Payment successful!</Header>;
       }
     
@@ -65,12 +68,14 @@ const PayPal = (props) => {
 
 const mapStateToProps = state => {
     return {
-        
+      cartItems: state.cartReducers.cart,
+      shoppingData: state.payPalReducers
     }
 }
 
 const mapDispatchToProps = {
-    editCart
+    editCart,
+    checkoutAdapter
 }
 
 export default withRouter(connect(
