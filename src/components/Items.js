@@ -14,9 +14,8 @@ const Items = (props) => {
 
     React.useEffect(() => {
         if (!itemsData) {
-            props.nameAdapter("Jirachi")
             props.search(queryMaker({  
-                name:"Jirachi",
+                name:"",
                 types:['All'],
                 subtype:"",
                 supertype:"",

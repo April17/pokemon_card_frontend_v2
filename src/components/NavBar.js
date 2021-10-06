@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Button, Menu, Header, Dropdown, Image } from 'semantic-ui-react'
+import { Button, Menu, Header, Dropdown, Image, Popup, Input, Icon } from 'semantic-ui-react'
 import { logInFromState } from '../redux/adapters/utilityAdapters' 
 import  '../assets/style/NavBar.css'
 import logo from '../assets/Logo/PokeBallicon.svg'
@@ -12,6 +12,7 @@ import Search from './Search'
 
 const NavBar = (props) => {
     
+    let [orderId, setOrderId] = React.useState("")
 
     const handleClick = (event) => {
         if (event.target.attributes.name.nodeValue === "login"){
@@ -32,6 +33,11 @@ const NavBar = (props) => {
             props.history.push(props.history.location.pathname)
         }
     }
+
+    const handleSearch = () => {
+        console.log(orderId)
+        props.history.push(`/order/${orderId}`, orderId)
+    } 
     // console.log(props.history)
     return (
         <Menu inverted className="navbar" size='small' borderless>
@@ -54,9 +60,29 @@ const NavBar = (props) => {
                 <Menu.Item active={false}>
                     <Header inverted as='h1' ></Header>
                 </Menu.Item>
+                <Menu.Item active={false}>
+                    <Header inverted as='h1' ></Header>
+                </Menu.Item>
             </Menu.Menu>
                 <Search/>
             <Menu.Menu position='right'>
+                <Menu.Item active={false}>
+                    <Popup
+                        on='click'
+                        pinned
+                        className="frostglass-dark"
+                        position='bottom center'
+                        trigger={<Header inverted as='h4' ><Link to={props.history.location.pathname} className="link-color"> Check Order </Link></Header>}
+                    >
+                        <Popup.Content>
+                            <Input
+                                icon={<Icon name='search' onClick={handleSearch} inverted circular link />}
+                                onChange={(event) => setOrderId(event.currentTarget.value)}
+                                placeholder='Search...'
+                            />
+                        </Popup.Content>
+                    </Popup>
+                </Menu.Item>
                 {
                     localStorage.token? 
                     (

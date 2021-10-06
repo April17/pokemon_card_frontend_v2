@@ -6,6 +6,7 @@ import CheckoutItem from '../components/CheckoutItem'
 import CheckoutComfirmation from '../components/CheckoutConfirmation'
 import PayPal from '../components/PayPal'
 import { priceChecker } from '../utility/utility'
+import { auth } from '../redux/adapters/currentUserAdapters'
 import CardBack from '../assets/Image/pokemon_card_backside.png'
 import '../assets/style/CheckoutPage.css'
 
@@ -20,6 +21,10 @@ const CheckoutPage = (props) => {
     let total = 0
 
     React.useEffect(() => {
+
+        if(localStorage.token){
+            props.auth()
+        }
 
         return() => {
             console.log("unmount")
@@ -164,6 +169,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
+    auth
 }
 
 export default withRouter(connect(

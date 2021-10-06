@@ -31,10 +31,10 @@ const Frontpage = (props) => {
                         <Segment className="frostglass" textAlign='center' >
                             <Image className="banner-height" src={BannerLarge} spaced='right'/>
                             <Rail internal attached position='left' size='huge' id='rail'>
-                                <Segment className='frostglass' id='rail-segment'>
+                                {/* <Segment className='frostglass' id='rail-segment'>
                                     <Header as='h2'> Sword & Shield</Header>
                                     <Header as='h2'> Evolving Skies</Header>
-                                </Segment>
+                                </Segment> */}
                             </Rail>
                         </Segment> 
                     </Grid.Column>

@@ -2,6 +2,9 @@
     background-color: black;
     height: 95vh;
 }
+.cart-subtotal{
+    padding-left: 10px !important;
+}
 .card-content{
     margin-top: 0px !important;
     margin-bottom: 0px !important;

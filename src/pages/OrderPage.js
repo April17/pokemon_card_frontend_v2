@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
-import { Header, Grid, Segment, Popup, Item, Divider, Image, Dimmer, Icon } from 'semantic-ui-react'
+import { Header, Grid, Segment, Popup, Item, Divider, Image } from 'semantic-ui-react'
 import { getOrders } from '../redux/adapters/orderAdapters'
 import { priceChecker } from '../utility/utility'
 import OrderItem  from '../components/OrderItem'

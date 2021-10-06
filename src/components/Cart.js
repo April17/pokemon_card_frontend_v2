@@ -56,7 +56,7 @@ const Cart = (props) => {
                   <Segment className='transparent' textAlign='left'>
                     <Grid columns={2}>
                       <Grid.Column>
-                        <Header inverted>Subtotal:</Header>
+                        <Header className="cart-subtotal" inverted>Subtotal:</Header>
                       </Grid.Column>
                       <Grid.Column>
                        <Header className="price-to-right" inverted>${calculateSubtotal()}</Header>
@@ -92,7 +92,7 @@ const Cart = (props) => {
                   <Segment className='transparent' textAlign='left'>
                     <Grid columns={2}>
                         <Grid.Column>
-                          <Header inverted>Subtotal:</Header>
+                          <Header className="cart-subtotal" inverted>Subtotal:</Header>
                         </Grid.Column>
                         <Grid.Column>
                         <Header className="price-to-right" inverted>${calculateSubtotal()}</Header>

@@ -9,12 +9,24 @@ export const orderAdapters = (items, shippingData, paymentData) => dispatch => {
             shippingData: shippingData
         }
     }
-    console.log("checkoutData: ", checkoutData)
-    const config = {
-        method: 'POST',
-        headers: HEADERS,
-        body: JSON.stringify(checkoutData)
+    let config = {}
+    
+    if(localStorage.token){
+        config = {
+            method: 'POST',
+            headers: {
+                Authorization: localStorage.token
+            },
+            body: JSON.stringify(checkoutData)
+        }
+    } else {
+        config = {
+            method: 'POST',
+            headers: HEADERS,
+            body: JSON.stringify(checkoutData)
+        }
     }
+    console.log("config: ", config) 
     return fetch(`${API_ROOT}/order`, config)
         .then(rsp => rsp.json())
 }

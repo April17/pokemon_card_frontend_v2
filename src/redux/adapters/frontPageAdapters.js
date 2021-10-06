@@ -10,7 +10,7 @@ export const frontPageFeaturedCard = () => dispatch => {
             'X-Api-Key': API_KEY
           }
     }
-    fetch(`${POKEMON_API_ROOT}/cards?q=name:"Rayquaza"&pageSize=12`, config)
+    fetch(`${POKEMON_API_ROOT}/cards?q=name:"Jirachi"&pageSize=12`, config)
         .then(rsp => rsp.json())
         .then(data => {
             dispatch(actions.featuredData(data.data))
