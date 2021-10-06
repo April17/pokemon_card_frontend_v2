@@ -33,10 +33,8 @@ const PayPal = (props) => {
             onApprove: async (data, actions) => {
               const order = await actions.order.capture();
               setPaid(true);
-              console.log("shoppingData in PayPal: ", props.shoppingData)
               props.orderAdapters(props.cartItems, props.shoppingData, order)
                 .then(data => {
-                  console.log(data.response)
                   if(data.response.body === 'Order Success'){
                     props.history.push(`/order/${data.response.orderId}`, data.response.orderId)
                     props.editCart([])
@@ -70,7 +68,6 @@ const PayPal = (props) => {
             return <Header as="h3" inverted color='red'>Error Occurred in processing payment! Please try again.</Header>;
       }
       
-      console.log("PayPal: ", props.shoppingData)
       return (
           <div id="paypal-button" ref={paypalRef} />
       );

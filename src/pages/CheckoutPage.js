@@ -26,9 +26,6 @@ const CheckoutPage = (props) => {
             props.auth()
         }
 
-        return() => {
-            console.log("unmount")
-        }
     }, [])
 
     const genCheckoutItems = () => {

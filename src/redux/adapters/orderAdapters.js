@@ -26,7 +26,6 @@ export const orderAdapters = (items, shippingData, paymentData) => dispatch => {
             body: JSON.stringify(checkoutData)
         }
     }
-    console.log("config: ", config) 
     return fetch(`${API_ROOT}/order`, config)
         .then(rsp => rsp.json())
 }
@@ -37,7 +36,6 @@ export const orderSuccess = (orderId) => dispatch => {
 }
 
 export const getOrders = (orderIds) => dispatch => {
-    console.log(orderIds)
     const config = {
         method: 'POST',
         headers: HEADERS,
@@ -46,13 +44,11 @@ export const getOrders = (orderIds) => dispatch => {
     return fetch(`${API_ROOT}/getorder`, config)
         .then(rsp => rsp.json())
         .then(data => {
-            console.log(data.response)
             if(data.response.orders.length === 1){
                 dispatch(actions.getOrder(data.response.orders[0]))
             } else if(data.response.orders.length > 1) {
                 console.log("for Profile Page")
             } else {
-                console.log("no Order found")
                 dispatch(actions.noOrderFound())
             }
         })

@@ -30,7 +30,11 @@ const NavBar = (props) => {
             localStorage.rememberMe = rememberMe
             localStorage.userId = userId
             localStorage.cart = cart
-            props.history.push(props.history.location.pathname)
+            if(props.history.location.pathname === '/profile'){
+                props.history.push('/')
+            } else {
+                props.history.push(props.history.location.pathname)
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from "react-redux"
-import { Header, Grid, Segment } from 'semantic-ui-react'
+import { Header, Grid, Segment, Popup } from 'semantic-ui-react'
 import { getProfileAdapter } from '../redux/adapters/currentUserAdapters'
 import AccountInfo from '../components/AccountInfo'
 import ProfileOrders from '../components/ProfileOrders'
@@ -64,6 +64,120 @@ const ProfilePage = (props) => {
         }
     }
 
+    const loadingRecentOrder = () => {
+        return(
+            <Segment className="frostglass-dark" textAlign='left'>
+                <Grid textAlign='center' divided='vertically'>
+                    <Grid.Row columns={6} stretched>
+                        <Grid.Column className='no-right-padding'>
+                            <Segment className="transparent" textAlign='left'>
+                                <Header className="compact-headers" as="h5" inverted>OrderId:</Header>
+                                <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                            </Segment> 
+                        </Grid.Column>
+                        <Grid.Column className='no-right-padding'>
+                            <Segment className="transparent" textAlign='left'>
+                                <Popup
+                                    position='bottom center'
+                                    hoverable
+                                    className="frostglass-dark" 
+                                    trigger={
+                                        <div>
+                                            <Header as="h5" className="compact-headers" inverted>Shipping Address:</Header>
+                                            <Header as="h5" className="compact-headers" inverted>Loading...</Header>
+                                        </div>
+                                    } 
+                                    >
+                                        <Popup.Content>
+                                            <Header className="compact-headers" as="h5" inverted>Email</Header>
+                                            <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                                            <Header className="compact-headers" as="h5" inverted>Address</Header>
+                                            <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                                        </Popup.Content>
+                                </Popup>
+                            </Segment> 
+                        </Grid.Column>
+                        <Grid.Column className='no-right-padding'>
+                            <Segment className="transparent" textAlign='left'>
+                                <Header className="compact-headers" as="h5" inverted>Order Date:</Header>
+                                <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                            </Segment> 
+                        </Grid.Column>
+                        <Grid.Column className='no-right-padding'>
+                            <Segment className="transparent" textAlign='left'>
+                                <Header className="compact-headers" as="h5" inverted>Status</Header>
+                                <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                            </Segment> 
+                        </Grid.Column>
+                        <Grid.Column className='no-right-padding'>
+                            <Segment className="transparent" textAlign='left'>
+                                <Header className="compact-headers" as="h5" inverted>Total:</Header>
+                                <Header className="compact-headers" as="h5" inverted>Loading...</Header>
+                            </Segment> 
+                        </Grid.Column>
+                        <Grid.Column className='no-right-padding' width={1}>
+                            <Segment className="transparent" textAlign='left'>
+                                <Header className="compact-headers" as="h5" inverted>More Detail</Header>
+                            </Segment> 
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </Segment>
+        )
+    }
+
+    const loadingPage = () => {
+        return (
+            <Segment className='frostglass'>
+            <Grid textAlign='left' divided='vertically'>
+                <Grid.Row  stretched>
+                    <Grid.Column>
+                        <Segment className='transparent'>
+                            <Header inverted> Basic Info</Header>
+                            <Grid textAlign='left' divided='vertically'>
+                                <Grid.Row columns={3}  stretched>
+                                    <Grid.Column>
+                                        <Segment className='transparent'>
+                                            <Header inverted>UserId: Loading...</Header>
+                                        </Segment>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        <Segment className='transparent'>
+                                            <Header inverted>Nickname: Loading...</Header>
+                                        </Segment>
+                                    </Grid.Column>
+                                    <Grid.Column>
+                                        <Segment className='transparent'>
+                                            <Header inverted>Account Type: Loading...</Header>
+                                        </Segment>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        </Segment>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row  stretched>
+                    <Grid.Column>
+                        <Segment className='transparent'>
+                            <Header inverted> Recent Orders </Header>
+                                {loadingRecentOrder()}
+                                {loadingRecentOrder()}
+                        </Segment>
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row  stretched>
+                    <Grid.Column>
+                        <Segment className='transparent'>
+                            <Header inverted> Deck List</Header>
+                            <Header inverted>Under Development</Header>
+                        </Segment>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+        </Segment>
+        )
+    }
+
 
     
     // console.log("userData: ", props.userData)
@@ -73,7 +187,7 @@ const ProfilePage = (props) => {
                 <Grid.Row id="result-bar" columns={1}>
                     <Grid.Column  width={16}>
                         <Segment className="frostglass" textAlign='left' >
-                            <Header inverted>Welcome Back {userData.nickName}</Header>
+                            <Header inverted>Welcome Back {userData.userId? userData.nickName : "Loading..."}</Header>
                         </Segment>
                     </Grid.Column>
                 </Grid.Row>
@@ -113,7 +227,7 @@ const ProfilePage = (props) => {
                         </Segment>
                     </Grid.Column>
                     <Grid.Column width={12}>
-                        {userData.userId? tabSwitch() : null } 
+                        {userData.userId? tabSwitch() : loadingPage() } 
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

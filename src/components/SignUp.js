@@ -44,7 +44,9 @@ const SignUp = (props) => {
                 userId: userId,
                 nickName: nickName,
                 password: password,
-                accountType: "User"
+                accountType: "User",
+                orders: "[]",
+                decklist: "[]"
             }
             props.signUp(signUpDataPost)
                 .then(data => {
