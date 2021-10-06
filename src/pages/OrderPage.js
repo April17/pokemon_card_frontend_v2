@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Header, Grid, Segment, Popup, Item, Divider, Image } from 'semantic-ui-react'
-import { getOrders } from '../redux/adapters/orderAdapters'
+import { getOrders, resetOrderAdapter } from '../redux/adapters/orderAdapters'
 import { priceChecker } from '../utility/utility'
 import OrderItem  from '../components/OrderItem'
 import CardBack from '../assets/Image/pokemon_card_backside.png'
@@ -18,7 +18,11 @@ const OrderPage = (props) => {
 
     React.useEffect(() => {
         props.getOrders([props.match.params.id])
-    }, [props.match])
+
+        return() => {
+            props.resetOrderAdapter()
+        }
+    }, [props.match.params.id])
 
     const addressBuilder = () => {
         const addressData = JSON.parse(orderData.shippingAddress)
@@ -360,7 +364,6 @@ const OrderPage = (props) => {
         }
     }
     
-    console.log(props.order)
     return(
         <div className="page">
             <Grid textAlign='center' verticalAlign='middle' divided='vertically' columns={3}>
@@ -390,7 +393,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    getOrders
+    getOrders,
+    resetOrderAdapter
 }
 
 export default withRouter(connect(

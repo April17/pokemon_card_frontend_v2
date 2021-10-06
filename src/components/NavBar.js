@@ -39,7 +39,6 @@ const NavBar = (props) => {
     }
 
     const handleSearch = () => {
-        console.log(orderId)
         props.history.push(`/order/${orderId}`, orderId)
     } 
     // console.log(props.history)

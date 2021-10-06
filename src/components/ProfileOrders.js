@@ -20,10 +20,6 @@ const ProfileOrders = (props) => {
         return sortedOrders.map(sortedOrder => <ProfileOrder key={sortedOrder.orderId} order={sortedOrder} />)
     }
 
-
-
-    console.log("sortedOrders: ", sortedOrders)
-    console.log("userData: ", props.userData.orders)
     return(
         <Segment className='frostglass'>
             <Grid textAlign='left' divided='vertically'>

@@ -53,3 +53,8 @@ export const getOrders = (orderIds) => dispatch => {
             }
         })
 }
+
+
+export const resetOrderAdapter = () => dispatch => {
+    dispatch(actions.resetOrderAction())
+}

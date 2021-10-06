@@ -19,6 +19,8 @@ const defaultState = {
             return {...action.payload, recordFound: true}
         case 'NO_ORDER_FOUND':
             return {...state,orderId:"No Order Found", recordFound: false}
+        case 'RESET_ORDER':
+            return defaultState
         default:
             return state
     }
