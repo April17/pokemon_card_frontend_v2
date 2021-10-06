@@ -3,4 +3,5 @@ export const actions = {
     loginFail: () => ({type: "LOGIN_FAIL"}),
     getProfileAction: (userData) => ({ type: "GET_PROFILE", payload: userData }),
     auth: (authData) => ({type: "AUTH", payload: authData}), 
+    resrtProfileAction: () => ({type: "RESET_PROFILE"}), 
   };

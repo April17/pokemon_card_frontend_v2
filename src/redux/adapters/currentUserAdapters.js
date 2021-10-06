@@ -80,3 +80,7 @@ export const auth = () => dispatch => {
     }
 
 }
+
+export const resetProfileAdapter = () => dispatch => {
+    dispatch(actions.resrtProfileAction())
+}

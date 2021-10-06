@@ -19,8 +19,9 @@ const defaultState = {
       case 'GET_PROFILE':
         return {...state, userData: action.payload}
       case 'AUTH':
-        console.log("authReducer: ", action.payload)
         return {...state, auth: action.payload}
+      case 'RESET_PROFILE':
+        return defaultState
       default:
         return state
     }

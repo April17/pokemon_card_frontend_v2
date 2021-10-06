@@ -2,7 +2,7 @@ import React from 'react'
 import { withRouter, Link } from 'react-router-dom'
 import { connect } from "react-redux"
 import { Header, Grid, Segment, Popup } from 'semantic-ui-react'
-import { getProfileAdapter } from '../redux/adapters/currentUserAdapters'
+import { getProfileAdapter, resetProfileAdapter } from '../redux/adapters/currentUserAdapters'
 import AccountInfo from '../components/AccountInfo'
 import ProfileOrders from '../components/ProfileOrders'
 import AccountSetting from '../components/AccountSetting'
@@ -25,6 +25,9 @@ const ProfilePage = (props) => {
             props.history.push('/')
         } else {
             props.getProfileAdapter()
+        }
+        return() => {
+            props.resetProfileAdapter()
         }
     }, [props.history])
 
@@ -244,7 +247,8 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = {
-    getProfileAdapter
+    getProfileAdapter,
+    resetProfileAdapter
 }
 
 export default withRouter(connect(
