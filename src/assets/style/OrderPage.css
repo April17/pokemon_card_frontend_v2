@@ -1,0 +1,28 @@
+.order-page-first-row {
+    top: 65px;
+    margin-bottom: 10px !important;
+}
+
+.no-right-padding {
+    padding-right: 0px !important;
+}
+
+.compact-headers {
+    margin-top: 0px !important;
+    margin-bottom: 5px !important;
+}
+
+.to-right {
+    float: right;
+}
+.no-padding {
+    padding: 0px !important;
+}
+
+.order-page-no-top-padding {
+    padding-top: 0px !important;
+}
+
+.order-page-no-top-margin {
+    margin-top: 0px !important;
+}

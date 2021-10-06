@@ -3,7 +3,7 @@ import { connect } from "react-redux"
 import { withRouter } from 'react-router-dom'
 import { Header } from 'semantic-ui-react'
 import { editCart } from '../redux/adapters/cartAdapters'
-import { checkoutAdapter } from "../redux/adapters/checkoutAdapters";
+import { orderAdapters, orderSuccess } from "../redux/adapters/orderAdapters";
 
 
 
@@ -32,9 +32,19 @@ const PayPal = (props) => {
             },
             onApprove: async (data, actions) => {
               const order = await actions.order.capture();
-              props.checkoutAdapter(props.cartItems, props.shoppingData, order)
               setPaid(true);
-              // console.log(order);
+              console.log("shoppingData in PayPal: ", props.shoppingData)
+              props.orderAdapters(props.cartItems, props.shoppingData, order)
+                .then(data => {
+                  console.log(data.response)
+                  if(data.response.body === 'Order Success'){
+                    props.history.push(`/order/${data.response.orderId}`, data.response.orderId)
+                    props.editCart([])
+                  }
+              })
+                .catch(error => {
+                    console.log("Error: ", error)
+                })
             },
             onError: (err) => {
               setError(err);
@@ -50,7 +60,7 @@ const PayPal = (props) => {
               }
             }
           }
-      }, [props.total]);
+      }, [props.total, props.shoppingData]);
     
       if (paid) {
             return <Header as="h3" inverted>Payment successful!</Header>;
@@ -60,7 +70,7 @@ const PayPal = (props) => {
             return <Header as="h3" inverted color='red'>Error Occurred in processing payment! Please try again.</Header>;
       }
       
-      console.log("PayPal: ", props)
+      console.log("PayPal: ", props.shoppingData)
       return (
           <div id="paypal-button" ref={paypalRef} />
       );
@@ -69,13 +79,15 @@ const PayPal = (props) => {
 const mapStateToProps = state => {
     return {
       cartItems: state.cartReducers.cart,
-      shoppingData: state.payPalReducers
+      shoppingData: state.payPalReducers,
+      orderId: state.orderReducers.orderId
     }
 }
 
 const mapDispatchToProps = {
     editCart,
-    checkoutAdapter
+    orderAdapters,
+    orderSuccess
 }
 
 export default withRouter(connect(

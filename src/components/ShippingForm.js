@@ -74,13 +74,13 @@ const ShippingForm = (props) => {
 
     const handleSubmit = () => {
         let shippingData = {
-            payee: {
+            payer: {
                 firstName: firstName,
                 lastName: lastName
               },
               shippingData: {
                 streetAddress: streetAddress,
-                apt: apt,
+                streetAddress2: apt,
                 city: city,
                 state: state,
                 zipCode: zipCode
@@ -110,7 +110,7 @@ const ShippingForm = (props) => {
                             <Form.Select fluid label='State' placeholder='State' options={stateOptions} value={state} onChange={(event) => setState(event.target.outerText)}/>
                             <Form.Input fluid label='Zip Code' placeholder='Zip Code' type='number' value={zipCode} onChange={(event) => setZipCode(event.target.value)}/>
                         </Form.Group>
-                        <Button type='submit' inverted >Submit</Button>
+                        <Button type='submit' inverted >Next</Button>
                     </Form>
                 </Segment>    
             </Grid.Column>

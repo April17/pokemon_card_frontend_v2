@@ -9,13 +9,14 @@ function App() {
     <div className="App">
       <NavBar/>
       <Switch>
-        <Route exact path="/login"      component={index.SignUPLoginPage} />
-        <Route exact path="/signup"     component={index.SignUPLoginPage} />
-        <Route exact path="/profile"    component={index.ProfilePage} />
-        <Route exact path="/search"    component={index.SearchPage} />
-        <Route exact path="/checkout"    component={index.CheckoutPage} />
-        <Route exact path="/card/:id"    component={index.CardDetailPage} />
-        <Route exact path="/"           component={index.FrontPage} />
+        <Route exact path="/login"                  component={index.SignUPLoginPage} />
+        <Route exact path="/signup"                 component={index.SignUPLoginPage} />
+        <Route exact path="/profile"                component={index.ProfilePage} />
+        <Route exact path="/search"                 component={index.SearchPage} />
+        <Route exact path="/checkout"               component={index.CheckoutPage} />
+        <Route exact path="/card/:id"               component={index.CardDetailPage} />
+        <Route exact path="/order/:id"              component={index.OrderPage} />
+        <Route exact path="/"                       component={index.FrontPage} />
       </Switch>
     </div>
   );

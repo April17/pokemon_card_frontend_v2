@@ -15,7 +15,7 @@ export const queryMaker = (searchData) => {
     // console.log(searchData)
     let query = ''
     if(searchData.name !== ''){
-        query = `name:"${upcaseFirstLetter(searchData.name)}"`
+        query = `name:"${upcaseFirstLetter(searchData.name)}*"`
     }
     if(!searchData.types.includes('All') && searchData.types.length <= 1){
         query = `${query} types:${searchData.types}`

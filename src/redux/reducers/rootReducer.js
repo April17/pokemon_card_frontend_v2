@@ -5,6 +5,7 @@ import { frontPageReducers } from "./frontPageReducers"
 import { cartReducers } from "./cartReducers"
 import { searchReducers } from "./searchReducers";
 import { payPalReducers } from "./payPalReducers";
+import { orderReducers } from "./orderReducers";
 
 export default combineReducers({
     currentUserReducers,
@@ -12,5 +13,6 @@ export default combineReducers({
     frontPageReducers,
     cartReducers,
     searchReducers,
-    payPalReducers
+    payPalReducers,
+    orderReducers
 });

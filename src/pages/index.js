@@ -4,6 +4,7 @@ import FrontPage from './FrontPage'
 import SearchPage from './SearchPage'
 import CardDetailPage from './CardDetailPage'
 import CheckoutPage from './CheckoutPage'
+import OrderPage from './OrderPage'
 
 
 
@@ -13,6 +14,7 @@ export const index = {
     FrontPage,
     SearchPage,
     CardDetailPage,
-    CheckoutPage
+    CheckoutPage,
+    OrderPage
 }
   

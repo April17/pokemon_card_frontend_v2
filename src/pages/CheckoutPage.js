@@ -28,7 +28,7 @@ const CheckoutPage = (props) => {
 
     const genCheckoutItems = () => {
         return cartItems.map(cartItem =>             
-            <CheckoutItem key={cartItem.name} data={{...cartItem}} />
+            <CheckoutItem key={cartItem.id} data={{...cartItem}} />
         )
     }
 
