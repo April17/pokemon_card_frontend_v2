@@ -12,7 +12,7 @@ export const logIn = logInData => dispatch => {
     return fetch(`${API_ROOT}/login`, config)
         .then(rsp => rsp.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             if(data.token){
                 localStorage.token = data.token
                 dispatch(actions.loginSuccess(data.userId))
@@ -35,6 +35,28 @@ export const signUp = signUpData => dispatch => {
     return fetch(`${API_ROOT}/signup`, config)
         .then(rsp => rsp.json())
 };
+
+export const getProfileAdapter = () => dispatch => {
+    if(localStorage.token){
+        const config = {
+            method: 'GET',
+            headers: {
+                Authorization: localStorage.token
+            }
+        }
+        fetch(`${API_ROOT}/profile`, config)
+            .then(rsp => rsp.json())
+            .then(data => {
+                // console.log(data)
+                dispatch(actions.getProfileAction(data.response))
+            })
+            .catch(error => {
+                logOut()
+                dispatch(actions.auth(false))
+                console.log("Error: ", error)
+            })
+    }
+}
 
 export const auth = () => dispatch => {
     if(localStorage.token){
