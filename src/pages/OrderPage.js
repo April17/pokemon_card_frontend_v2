@@ -18,7 +18,7 @@ const OrderPage = (props) => {
 
     React.useEffect(() => {
         props.getOrders([props.match.params.id])
-    }, [])
+    }, [props.match])
 
     const addressBuilder = () => {
         const addressData = JSON.parse(orderData.shippingAddress)
