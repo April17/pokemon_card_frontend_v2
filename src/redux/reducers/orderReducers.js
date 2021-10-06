@@ -7,7 +7,8 @@ const defaultState = {
     lastName: "",
     email: "",
     shippingAddress: "",
-    items: ""
+    items: "",
+    recordFound: false
 }
   
   export const orderReducers = (state = defaultState, action) => {
@@ -15,7 +16,9 @@ const defaultState = {
         case 'ORDER_SUCCESS':
             return {...state, orderId: action.payload}
         case 'GET_ORDER':
-            return {...action.payload}
+            return {...action.payload, recordFound: true}
+        case 'NO_ORDER_FOUND':
+            return {...state,orderId:"No Order Found", recordFound: false}
         default:
             return state
     }

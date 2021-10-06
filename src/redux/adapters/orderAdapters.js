@@ -37,8 +37,11 @@ export const getOrders = (orderIds) => dispatch => {
             console.log(data.response)
             if(data.response.orders.length === 1){
                 dispatch(actions.getOrder(data.response.orders[0]))
-            } else {
+            } else if(data.response.orders.length > 1) {
                 console.log("for Profile Page")
+            } else {
+                console.log("no Order found")
+                dispatch(actions.noOrderFound())
             }
         })
 }
