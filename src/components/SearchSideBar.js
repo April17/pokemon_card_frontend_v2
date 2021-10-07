@@ -32,7 +32,7 @@ const subtypesData = [
     { key: 'Rapid Strike', text: 'Rapid Strike', value: 'Rapid Strike' },
     { key: 'Restored', text: 'Restored', value: 'Restored' },
     { key: "Rocket's Secret Machine", text: "Rocket's Secret Machine", value: "Rocket's Secret Machine" },
-    { key: '"Single Strike', text: '"Single Strike', value: '"Single Strike' },
+    { key: 'Single Strike', text: 'Single Strike', value: 'Single Strike' },
     { key: 'Special', text: 'Special', value: 'Special' },
     { key: 'Stadium', text: 'Stadium', value: 'Stadium' },
     { key: 'Stage 1', text: 'Stage 1', value: 'Stage 1' },

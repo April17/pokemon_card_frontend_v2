@@ -14,6 +14,10 @@ const CardDetailPage = (props) => {
     const cardData = props.history.location.state
     let [qty, setQty] = React.useState(1)
 
+    // React.useEffect(() => {
+
+    // }, [props.history.location.state])
+
     const genAttacks = () => {
         const attacks = cardData.attacks
         return attacks.map((attack, index) =>             
