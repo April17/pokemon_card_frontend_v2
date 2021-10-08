@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
         return() => {
             props.resetProfileAdapter()
         }
-    }, [props.history])
+    }, [])
 
     const tabSwitch = () => {
         if(accountInfoToggle){
