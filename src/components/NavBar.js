@@ -75,7 +75,7 @@ const NavBar = (props) => {
                         pinned
                         className="frostglass-dark"
                         position='bottom center'
-                        trigger={<Header inverted as='h4' > Check Order </Header>}
+                        trigger={<Header  className="pointer" inverted as='h4' >Check Order</Header>}
                     >
                         <Popup.Content>
                             <Input

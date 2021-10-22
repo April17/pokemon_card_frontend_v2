@@ -10,3 +10,7 @@
     margin: auto;
     width: 50%;
 }
+
+.pointer {
+    cursor: pointer;
+}
