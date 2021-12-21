@@ -6,11 +6,7 @@ import '../assets/style/CardDetailPage.css'
 import { editCart } from '../redux/adapters/cartAdapters'
 import { priceChecker } from '../utility/utility'
 
-
-
-
 const CardDetailPage = (props) => {
-
     const cardData = props.history.location.state
     let [qty, setQty] = React.useState(1)
 

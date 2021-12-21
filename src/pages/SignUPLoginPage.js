@@ -6,7 +6,6 @@ import Login from '../components/Login'
 import SignUp from  '../components/SignUp'
 import { logInFromState } from '../redux/adapters/utilityAdapters'
 
-
 const SignUPLoginPage = (props) => {
 
     React.useEffect(() => {
