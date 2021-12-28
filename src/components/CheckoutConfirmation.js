@@ -40,7 +40,7 @@ class CheckoutConfirmation extends Component {
             as='h1'
           >
             <Icon name='dropdown' />
-            Shapping Address
+            Shipping Address
           </Accordion.Title>
           <Accordion.Content active={activeIndex === 0}>
             <ShippingForm changeIndex={this.changeIndex} />
