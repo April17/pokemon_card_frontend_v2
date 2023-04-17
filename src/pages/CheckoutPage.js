@@ -148,7 +148,16 @@ const CheckoutPage = (props) => {
                             </Grid>  
                         </Segment>}
                         <Segment className="frostglass" textAlign='center'>
-                            {checkout? <PayPal total={total} /> : proceedToCheckoutCondition()}
+
+                            {checkout?
+                                <>                            
+                                    <Header as='h5' inverted>SandBox Account: mfqmfq2@personal.example.com</Header>
+                                    <Header as='h5' inverted>SandBox Password: Mfq54747300#%</Header>
+                                    <PayPal total={total} />
+                                </> 
+                                 : 
+                                proceedToCheckoutCondition()
+                            }
                         </Segment>      
                     </Grid.Column>
                 </Grid.Row>   
