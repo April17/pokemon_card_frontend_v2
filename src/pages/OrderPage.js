@@ -25,7 +25,6 @@ const OrderPage = (props) => {
     }, [props.match.params.id])
 
     const addressBuilder = () => {
-        console.log(orderData.shippingAddress)
         const addressData = JSON.parse(orderData.shippingAddress)
         return (`${addressData.streetAddress} 
                  ${addressData.streetAddress2} ${"\n"} 
