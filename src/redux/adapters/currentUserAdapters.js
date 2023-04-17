@@ -67,9 +67,8 @@ export const auth = () => dispatch => {
             }
         }
         fetch(`${API_ROOT}/auth`, config)
-            .then(rsp => { console.log(rsp); rsp.json()})
+            .then(rsp => rsp.json())
             .then(data => {
-                console.log(data)
                 dispatch(actions.auth(data.response.auth))
             })
             .catch(error => {
